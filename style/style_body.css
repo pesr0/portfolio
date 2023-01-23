@@ -1,0 +1,62 @@
+* {
+    font-family: 'Dosis', sans-serif;
+}
+
+header{
+    background-color: lightgrey;
+    display: flex;
+    height: 20vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+header p{
+    font-size: 3em;
+    margin: 1vh;
+}
+
+nav{
+    display: flex;
+    margin: 1vh;
+}
+
+nav button{
+    border: none;
+    border-radius: 5px;
+    background: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+nav button:hover{
+    background-color: rgba(128, 128, 128, 0.497);
+}
+
+ul{
+    display: none;
+    transition: all 1s;
+    color: lightgray;
+}
+
+#button_projects:hover + ul{
+    display: block;
+}
+
+ul:hover{
+    display: block;
+    color:black;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    background-color: lightgrey;
+}
+
+footer *{
+    margin: 0.5%;
+}
