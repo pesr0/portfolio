@@ -21,6 +21,14 @@ nav{
     margin: 1vh;
 }
 
+#dropdown {
+    display: none;
+  }
+  
+#dropdown.show {
+    display: block;
+  }
+
 nav button{
     border: none;
     border-radius: 5px;
@@ -34,19 +42,16 @@ nav button:hover{
     background-color: rgba(128, 128, 128, 0.497);
 }
 
-ul{
-    display: none;
-    transition: all 1s;
-    color: lightgray;
+
+a {
+    text-decoration: none;
+    color: black;
 }
 
-#button_projects:hover + ul{
-    display: block;
-}
-
-ul:hover{
-    display: block;
-    color:black;
+a:hover{
+    cursor: pointer;
+    color: yellow;
+    text-decoration: underline;
 }
 
 footer{
