@@ -21,13 +21,22 @@ nav{
     margin: 1vh;
 }
 
-#dropdown {
+.dropdown_menu {
     display: none;
-  }
-  
-#dropdown.show {
+    position: absolute;
+    z-index: 1;
+    background: rgba(128, 128, 128, 0.497);
+    padding: 1%;
+    border-radius: 3px;
+}
+
+
+.dropdown_btn:focus + .dropdown_menu,
+.dropdown_btn:hover + .dropdown_menu,
+.dropdown_menu:hover {
     display: block;
-  }
+}
+
 
 nav button{
     border: none;
@@ -54,7 +63,13 @@ a:hover{
     text-decoration: underline;
 }
 
+main{
+    height: 640px;
+}
+
 footer{
+    position: sticky;
+    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
