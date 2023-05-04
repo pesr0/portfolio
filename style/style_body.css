@@ -30,8 +30,6 @@ nav{
     border-radius: 3px;
 }
 
-
-.dropdown_btn:focus + .dropdown_menu,
 .dropdown_btn:hover + .dropdown_menu,
 .dropdown_menu:hover {
     display: block;
@@ -64,7 +62,37 @@ a:hover{
 }
 
 main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 640px;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+main > div{
+    display: flex;
+    width: 98%;
+    height: 95%;
+    border-radius: 10px;
+    background: rgba(187, 191, 195, 0.476);
+    flex-wrap: wrap;
+}
+
+div > .text{
+    display: flex;
+    height: 5%
+}
+
+div > p {
+    display: flex;
+    font-size: 3vh;
+    justify-content: center;
+    width: 100%;
+}
+
+.about_me{
+    
 }
 
 footer{
