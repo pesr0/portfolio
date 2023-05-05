@@ -77,18 +77,21 @@ main > div{
     border-radius: 10px;
     background: rgba(187, 191, 195, 0.476);
     flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.main_title{
+    margin: 0.5%;
+    font-size: 3vh;
+    width: 100%;
+    text-align: center;
+    text-decoration: underline;
 }
 
 div > .text{
     display: flex;
-    height: 5%
-}
-
-div > p {
-    display: flex;
-    font-size: 3vh;
-    justify-content: center;
-    width: 100%;
+    height: auto;
+    width: 50%;
 }
 
 .about_me{
