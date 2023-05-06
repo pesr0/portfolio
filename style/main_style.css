@@ -6,7 +6,7 @@ main > div{
     background: rgba(187, 191, 195, 0.476);
     flex-wrap: wrap;
     align-content: flex-start;
-    padding: 0.5%;
+    padding: 0.8%;
 }
 
 .main_title{
