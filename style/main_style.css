@@ -22,44 +22,8 @@ main > div{
     align-content: flex-start;
 }
 
-.text{
-    height: auto;
-    display: flex;
-    align-content: flex-start;
-    width: 50%;
-    text-align: justify;
-    line-height: 1.6;
-}
-
-.profile_pic_box{
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 2%
-}
-
-#profile_pic{
-    width: 50%;
-    border-radius:50%;
-}
-
 @media screen and (max-width: 1800px) {
-    
     main > div{
         height: auto;
     }
-
-    .text{
-        width: 98%;
-    }
-
-    .profile_pic_box{
-        width: 98%;
-    }
-    
-    #profile_pic{
-        width: 30%;
-    }
-
   }

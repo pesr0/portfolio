@@ -1,3 +1,7 @@
-#about_me{
+#about_me_topic{
     display: none;
+}
+
+#projects_topic{
+    display: block;
 }
