@@ -5,9 +5,10 @@
         <title>portfolio - Pedro</title>
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="style/reset.css">
-        <link rel="stylesheet" href="style/topics_display.css">
-        <link rel="stylesheet" href="style/style_body.css">
-        <link rel="stylesheet" href="style/style_aboutme.css">
+        <link rel="stylesheet" href="style/topics_display_style.css">
+        <link rel="stylesheet" href="style/body_style.css">
+        <link rel="stylesheet" href="style/projects_style.css">
+        <link rel="stylesheet" href="style/aboutme_style.css">
         <link rel="stylesheet" href="style/header_style.css">
         <link rel="stylesheet" href="style/main_style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,27 +16,26 @@
     </head>
 
     <body>
+
         <header>
 
             <p>portfolio - Pedro</p>
 
             <nav>
                 
-                    
-
-                    <div>
-                        <button class="dropdown_btn">projects</button>
-                        <ul class="dropdown_menu">
-                            <li><a target="_blank" href="https://pesr0.github.io/Desafio1_ONE/">Decoder (1 project ever done)</a></li>
-                            <li><a target="_blank" href="https://pesr0.github.io/to-do-list/">To-Do List</a></li>
-                            <li><a target="_blank" href="https://pesr0.github.io/wpp-init-chat/">WhatsApp Chat Starter</a></li>
-                        </ul>
-                    </div>
+                <div>
+                    <button class="dropdown_btn">projects</button>
+                    <ul class="dropdown_menu">
+                        <li><a target="_blank" href="https://pesr0.github.io/Desafio1_ONE/">Decoder (1 project ever done)</a></li>
+                        <li><a target="_blank" href="https://pesr0.github.io/to-do-list/">To-Do List</a></li>
+                        <li><a target="_blank" href="https://pesr0.github.io/wpp-init-chat/">WhatsApp Chat Starter</a></li>
+                    </ul>
+                </div>
                 
-
-                    <button>about me & contact</button>
+                <button>about me & contact</button>
                 
             </nav>
+
         </header>
 
         <main>
@@ -89,20 +89,68 @@
             </div>
 
             <div id="projects_topic">
+
                 <p class="main_title">projects</p>
 
                 <div class="main_lowbox">
                     
+                    <div class="project_item">
+                        <a href="https://pesr0.github.io/Desafio1_ONE/" target="_blank"><img src="assets/decoder.png"></a>
+                        <p class="project_title">DE-CODER</p>
+                        <br>
+                        <p class="project_description">
+                            This project was the first coding project I ever did, it was done as part of the ONE program in format of a challenge.
+                            It is basically a cipher (both an encoder and a decoder). You insert a text you want to encrypt, and than the program returns the encrypted format.
+                            <br>
+                            This program also implements some restrictions, e.g. you may not insert uppercase letters. And it has a button to copy the generated content.
+                            <br>
+                            For this program it wasn't used any framework. It was used only HTML, CSS and JavaScript. You can find and access the program in the following links:
+                        </p>
+                        <br>
+                        <a href="https://github.com/pesr0/Desafio1_ONE" target="_blank">GitHub Repository</a>
+                        <br>
+                        <a href="https://pesr0.github.io/Desafio1_ONE/" target="_blank">Program deployed in GitHub Pages</a>
+                    </div>
+
+                    <div class="project_item">
+                        <a href="https://pesr0.github.io/to-do-list/" target="_blank"><img src="assets/todolist.png"></a>
+                        <p class="project_title">To-Do List</p>
+                        <br>
+                        <p class="project_description">
+                            DESCRIÇÂO VAI AQUI
+                        </p>
+                        <br>
+                        <a href="https://github.com/pesr0/to-do-list" target="_blank">GitHub Repository</a>
+                        <br>
+                        <a href="https://pesr0.github.io/to-do-list/" target="_blank">Program deployed in GitHub Pages</a>
+                    </div>
+
+                    <div class="project_item">
+                        <a href="" target="_blank"><img src=""></a>
+                        <p class="project_title"></p>
+                        <br>
+                        <p class="project_description">
+
+                        </p>
+                        <nr></nr>
+                        <a href="" target="_blank"></a>
+                        <br>
+                        <a href="" target="_blank"></a>
+                    </div>
+
                 </div>
+
             </div>
 
         </main>
 
         <footer>
+
             <p class="item_footer">Pedro Tonom</p>
             <a class='item_footer' href='https://www.linkedin.com/in/pedro-tonom/' target="_blank"><img src="assets/linkedin.svg" title="LinkedIn"></a>
             <a class="item_footer" href='https://github.com/pesr0' target="_blank"><img src="assets/github.svg" title="GitHub"></a>
         </footer>
+
     </body>
     <script src="script/dropdown.js"></script>
 </html>
