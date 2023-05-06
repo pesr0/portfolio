@@ -1,0 +1,55 @@
+
+header p{
+    font-size: 3em;
+    margin: 1vh;
+}
+
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background: rgba(128, 128, 128, 0.497);
+    padding: 1%;
+    border-radius: 3px;
+    transition: background-color 0.5s;
+}
+
+
+.dropdown_btn:hover + .dropdown_menu,
+.dropdown_menu:hover {
+    display: block;
+}
+
+
+.dropdown_menu:hover{
+    background-color: rgb(128, 128, 128);
+}
+
+nav{
+    display: flex;
+    margin: 1vh;
+}
+
+nav button{
+    border: none;
+    border-radius: 5px;
+    background: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+nav button:hover{
+    background-color: rgba(128, 128, 128, 0.497);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    cursor: pointer;
+    color: yellow;
+    text-decoration: underline;
+}
