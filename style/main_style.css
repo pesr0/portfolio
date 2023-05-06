@@ -3,9 +3,11 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 640px;
+    height: 100%;
     overflow: hidden;
     flex-wrap: wrap;
+    margin: 0.5%;
+    box-sizing: border-box;
 }
 
 main > div{

@@ -9,6 +9,7 @@ header{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 header p{
@@ -28,6 +29,7 @@ nav{
     background: rgba(128, 128, 128, 0.497);
     padding: 1%;
     border-radius: 3px;
+    transition: background-color 0.5s;
 }
 
 .dropdown_btn:hover + .dropdown_menu,
@@ -35,6 +37,9 @@ nav{
     display: block;
 }
 
+.dropdown_menu:hover{
+    background-color: rgb(128, 128, 128);
+}
 
 nav button{
     border: none;
@@ -69,6 +74,7 @@ footer{
     align-items: center;
     height: 10vh;
     background-color: lightgrey;
+    box-sizing: border-box;
 }
 
 footer *{
