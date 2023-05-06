@@ -22,7 +22,7 @@ header p{
 
 
 .dropdown_menu:hover{
-    background-color: rgb(128, 128, 128);
+    background-color: rgba(128, 128, 128, 0.641);
 }
 
 nav{
@@ -50,6 +50,6 @@ a {
 
 a:hover{
     cursor: pointer;
-    color: yellow;
+    color: rgb(0, 136, 255);
     text-decoration: underline;
 }
