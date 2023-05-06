@@ -61,43 +61,6 @@ a:hover{
     text-decoration: underline;
 }
 
-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 640px;
-    overflow: hidden;
-    flex-wrap: wrap;
-}
-
-main > div{
-    display: flex;
-    width: 98%;
-    height: 95%;
-    border-radius: 10px;
-    background: rgba(187, 191, 195, 0.476);
-    flex-wrap: wrap;
-    align-content: flex-start;
-}
-
-.main_title{
-    margin: 0.5%;
-    font-size: 3vh;
-    width: 100%;
-    text-align: center;
-    text-decoration: underline;
-}
-
-div > .text{
-    display: flex;
-    height: auto;
-    width: 50%;
-}
-
-.about_me{
-    
-}
-
 footer{
     position: sticky;
     bottom: 0;

@@ -1,0 +1,50 @@
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 640px;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+main > div{
+    display: flex;
+    width: 98%;
+    height: 95%;
+    border-radius: 10px;
+    background: rgba(187, 191, 195, 0.476);
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 0.5%;
+}
+
+.main_title{
+    margin: 0 0.5% 0.5%;
+    font-size: 3vh;
+    width: 100%;
+    text-align: center;
+    text-decoration: underline;
+}
+.main_lowbox{
+    display: flex;
+}
+
+div > .text{
+    display: flex;
+    height: auto;
+    width: 50%;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.profile_pic_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#profile_pic{
+    width: 50%;
+    border-radius:50%;
+}
