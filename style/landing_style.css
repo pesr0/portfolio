@@ -1,0 +1,18 @@
+#landing_page{
+    box-sizing: content-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95%;
+}
+
+#landing_page p{
+    font-size: 5vh;
+    text-align: justify;
+}
+
+#projects_hyperlink, 
+#aboutme_hyperlink{
+    text-decoration: underline;
+    cursor: pointer;
+}

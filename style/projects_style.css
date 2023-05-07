@@ -11,6 +11,7 @@
     background-color: rgba(187, 191, 195, 0.662);
     border-radius: 10px;
     border: 1px solid black;
+    overflow: hidden;
 
 }
 
