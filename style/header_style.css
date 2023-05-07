@@ -4,6 +4,10 @@ header p{
     margin: 1vh;
 }
 
+#title_btn{
+    cursor: pointer;
+}
+
 .dropdown_menu {
     display: none;
     position: absolute;

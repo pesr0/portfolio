@@ -1,7 +1,12 @@
-#about_me_topic{
-    display: none;
+#aboutme_page{
+ display: none;
 }
 
-#projects_topic{
+#projects_page{
+    display: none;
+    height: auto;
+}
+
+#landing_page{
     display: block;
 }
