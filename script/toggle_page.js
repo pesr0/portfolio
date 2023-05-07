@@ -1,4 +1,4 @@
-const aboutmeBtn = document.querySelector('.aboutme_btn');
+const aboutmeBtn = document.querySelector('#aboutme_btn');
 const projectsBtn = document.querySelector('.dropdown_btn');
 const landingLnk = document.querySelector('#title_btn');
 const aboutmePg = document.querySelector('#aboutme_page');
