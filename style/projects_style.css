@@ -5,7 +5,7 @@
     align-items: center;
     text-align: justify;
     width: 400px;
-    height: auto;
+    height: 500px;
     padding: 1%;
     margin: 1%;
     background-color: rgba(187, 191, 195, 0.662);
@@ -24,3 +24,13 @@
     font-weight: bold;
 }
 
+.project_link {
+    background-color: rgb(187, 191, 195);
+    padding: 1%;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+.project_link:hover{
+    background-color: rgba(0, 0, 0, 0.445);
+}
