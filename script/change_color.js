@@ -4,8 +4,9 @@ let colorIndex = 0; // Variável para rastrear o índice atual da cor
 
 function changeColor() {
     setTimeout(() => {
-        textElement[0].style.color=colors[colorIndex];
-        textElement[1].style.color=colors[colorIndex+1];
+        textElement.forEach(element => {
+            element.style.color=colors[colorIndex];
+        });
         colorIndex = (colorIndex + 1) % colors.length; // Altera o índice da cor para a próxima cor no array
         changeColor();
 
