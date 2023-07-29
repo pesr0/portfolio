@@ -7,7 +7,7 @@ const landingPg = document.querySelector('#landing_page');
 const aboutmeHL = document.querySelector('#aboutme_hyperlink');
 const projectsHL = document.querySelector('#projects_hyperlink');
 
-
+/*
 function aboutme_block() {
   aboutmePg.style.display='block';
   projectsPg.style.display='none';
@@ -30,3 +30,4 @@ aboutmeBtn.addEventListener('click', aboutme_block);
 projectsBtn.addEventListener('click', projects_block);
 aboutmeHL.addEventListener('click', aboutme_block);
 projectsHL.addEventListener('click', projects_block);
+*/
