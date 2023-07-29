@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 95%;
+    min-height: 95%;
 }
 
 #landing_page p{
@@ -21,3 +21,10 @@
 .colors{
     transition: color 1s;
 }
+
+@media screen and (max-width: 1800px) {
+
+    #landing_page p {
+        font-size: 3vh;
+    }
+  }
