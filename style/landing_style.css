@@ -9,6 +9,7 @@
 #landing_page p{
     font-size: 5vh;
     text-align: justify;
+    line-height: 1.5;
 }
 
 #projects_hyperlink, 
