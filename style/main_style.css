@@ -1,7 +1,7 @@
 main > div{
     display: flex;
     width: 98%;
-    height: 95%;
+    height: auto;
     border-radius: 10px;
     background: rgba(187, 191, 195, 0.476);
     flex-wrap: wrap;
@@ -22,9 +22,3 @@ main > div{
     align-content: flex-start;
     justify-content: center;
 }
-
-@media screen and (max-width: 1800px) {
-    main > div{
-        height: auto;
-    }
-  }
