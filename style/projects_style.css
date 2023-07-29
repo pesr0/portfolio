@@ -4,8 +4,8 @@
     flex-direction: column;
     align-items: center;
     text-align: justify;
-    width: 400px;
-    height: 500px;
+    max-width: 400px;
+    max-height: 500px;
     padding: 1%;
     margin: 1%;
     background-color: rgba(187, 191, 195, 0.662);
@@ -35,3 +35,11 @@
 .project_link:hover{
     background-color: rgba(0, 0, 0, 0.445);
 }
+
+@media screen and (max-width: 1800px) {
+
+    .project_item{
+        width: 90%;
+    }
+   
+  }
