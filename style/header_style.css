@@ -39,14 +39,15 @@ li:hover{
 nav button{
     border: none;
     border-radius: 5px;
-    background: none;
+    background-color: rgba(133, 133, 133, 0.5);;
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.5s;
+    margin: 1px;
 }
 
 nav button:hover{
-    background-color: rgba(128, 128, 128, 0.497);
+    background-color: rgba(66, 66, 66, 0.5);
 }
 
 a {
