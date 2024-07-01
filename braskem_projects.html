@@ -56,24 +56,91 @@
                 </div>
 
                 <div class="braskem_item">
-                    <div class="braskem_item_title">PLACEHOLDER</div>
+                    <div class="braskem_item_title">Bimodal Peak Deconvolution</div>
                     
                     <div class="braskem_inner">
                         <div class="braskem_subitem inner_desc">
-                            PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER 
-                            PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER 
+                            There was a task, where a certain type of data should be retrieved from peaks in signals, but sometimes these peaks were merged togheter
+                            (when a signal has two peaks it is called bimodal). So this project aimed to take those bimodal signals and make a deconvolution of the peaks in it
+                            returning what the peak would be without the interference of another. So by having the "clean" peak, it was possible to retrieve the desired information
+                            from the peaks.
                         </div>
 
                         <div class="braskem_subitem inner_topics">
-                            <p>●ITEM</p> <p>●ITEM</p> <p>●ITEM</p> <p>●ITEM</p> <p>●ITEM</p>
+                            <p>●pandas</p> <p>●numpy</p> <p>●scikit-learn</p> <p>●scipy</p> <p>●Machine Learning</p>
                         </div>
 
                         <div class="braskem_subitem">
-                            <img src="assets/braskem_logo.png">
+                            <img src="assets/dummy.png">
                         </div>
                     </div>
 
                 </div>
+
+                <div class="braskem_item">
+                    <div class="braskem_item_title">Image Featurization</div>
+                    
+                    <div class="braskem_inner">
+                        <div class="braskem_subitem inner_desc">
+                            Sometimes we needed information from image, these images often were "engineering" images, so it was not as simple as extracting text from images with tesseract.
+                            In this project we utilized the numerical value represented by every pixel to gather insights and get relevant info from the image. This process of transforming
+                            and object (in this case a image) in numbers (in this case pixels values) is called featurization. In the end we were able to gather the info we needed and also
+                            identify specifics geometry objects in the image with featurization. This project was also deployed online, in order to make it able for whoever needed.
+                        </div>
+
+                        <div class="braskem_subitem inner_topics">
+                            <p>●pandas</p> <p>●numpy</p> <p>●OpenCV</p> <p>●scikt-image</p> <p>●streamlit</p>
+                        </div>
+
+                        <div class="braskem_subitem">
+                            <img src="assets/dummy.png">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="braskem_item">
+                    <div class="braskem_item_title">ML Singal Comparator</div>
+                    
+                    <div class="braskem_inner">
+                        <div class="braskem_subitem inner_desc">
+                            We have a huge set of sigals from a certain analsys technique, each one different from another. And often we receive a new signal,
+                            which can be different from the other or very similar to one of them, and this new peak should be classified taking that in consideration. 
+                            This task of classifying the new signal was done manually by one of the analysts, and considering that we have an enormous set of signal, this task is
+                            extremely difficult and laborious. Knowing that, this project aimed to develop a ML model, trained with the original signals and classify the new signal
+                            based on the orignals.
+                        </div>
+
+                        <div class="braskem_subitem inner_topics">
+                            <p>●pandas</p> <p>●numpy</p> <p>●scikit-learn</p> <p>●scipy</p> <p>●dataiku</p>
+                        </div>
+
+                        <div class="braskem_subitem">
+                            <img src="assets/dummy.png">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="braskem_item">
+                    <div class="braskem_item_title">RPA Extracting</div>
+                    
+                    <div class="braskem_inner">
+                        <div class="braskem_subitem inner_desc">
+                            Since braskem is also a research company, it has a lot of equipament to run analytical techniques, and often these equipament have their own software
+                            to treat the data the equipament generate. Since braskem is a huge company, a lot of analysis are done and takes a lot of time to work manually on those
+                            softwares to extract the data generated by the equipament. Hence, to save analists time, soma automations (RPA) were developed to extract the data automagically
+                            from the softwares. Also, some automations envolved extract data from files such as pdfs and images.
+                        </div>
+
+                        <div class="braskem_subitem inner_topics">
+                            <p>●tkinter</p> <p>●pyautogui</p> <p>●tesseract</p> <p>●OpenCV</p>
+                        </div>
+
+                        <div class="braskem_subitem">
+                            <img src="assets/dummy.png">
+                        </div>
+                    </div>
 
             </div>
         </main>
