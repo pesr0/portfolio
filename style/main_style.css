@@ -3,7 +3,6 @@ main > div{
     min-width: 350px;
     width: 98%;
     height: auto;
-    border-radius: 10px;
     background: rgba(187, 191, 195, 0.476);
     flex-wrap: wrap;
     align-content: flex-start;
