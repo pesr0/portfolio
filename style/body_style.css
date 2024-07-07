@@ -10,8 +10,8 @@ header{
     box-sizing: content-box;
     background-color: lightgrey;
     display: flex;
-    height: 20%;
-    justify-content: center;
+    height: 15%;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
 }
@@ -21,7 +21,7 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 75%;
+    height: 80%;
     overflow: auto;
     flex-wrap: wrap;
     margin: 0.5%;
