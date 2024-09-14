@@ -16,6 +16,10 @@
     margin: 2%
 }
 
+#aboutme_page{
+    padding: 0.8%;
+}
+
 #profile_pic{
     width: 50%;
     border-radius:50%;
