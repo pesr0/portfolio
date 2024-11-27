@@ -73,7 +73,7 @@
 #landing_mini_aboutme > div{
     width: 25%;
     text-align: justify;
-    min-width: 250px;
+    min-width: 180px;
 }
 
 #mini_aboutme_pic{
@@ -135,6 +135,7 @@
     max-width: 300px;
     width: 30%;
     height: 98%;
+    min-height: 100px;
     background-color: rgba(187, 191, 195, 0.662);
     justify-content: center;
     align-items: center;
