@@ -67,10 +67,13 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    flex-wrap: wrap;
 }
 
-#landing_mini_aboutme div{
+#landing_mini_aboutme > div{
     width: 25%;
+    text-align: justify;
+    min-width: 250px;
 }
 
 #mini_aboutme_pic{
@@ -129,7 +132,8 @@
     display: flex;
     box-sizing: content-box;
     flex-direction: row;
-    width: 20%;
+    max-width: 300px;
+    width: 30%;
     height: 98%;
     background-color: rgba(187, 191, 195, 0.662);
     justify-content: center;
