@@ -56,16 +56,48 @@
                         I appreciate your interest in my journey!
                     </p>   
                 </div>
-
+                
                 <div class="braskem_item">
-                    <div class="braskem_item_title">Bimodal Peak Deconvolution</div>
+                    <div class="braskem_item_title">Multimodal Signals ML Classifier</div>
                     
                     <div class="braskem_inner">
-                        <div class="braskem_subitem inner_desc">
-                            There was a task, where a certain type of data should be retrieved from peaks in signals, but sometimes these peaks were merged togheter
-                            (when a signal has two peaks it is called bimodal). So this project aimed to take those bimodal signals and make a deconvolution of the peaks in it
-                            returning what the peak would be without the interference of another. So by having the "clean" peak, it was possible to retrieve the desired information
-                            from the peaks.
+                        <div class="inner_desc">
+                            Development of a <u><b>pipeline</b></u> where a raw data file containing a signal from a specific material analysis 
+                            technique is used as input. After automated <u><b>normalization</b></u> of this signal, <b><u>features are extracted</u></b> and used as 
+                            input data in a pre-trained <u><b>Random Forest</b></u> (sklearn) model to predict the type of material corresponding to 
+                            the signal. Based on this pipeline and model, a <b><u>software</u></b> solution (<u><b>Python</b></u>) with a graphical interface 
+                            (<u><b>Tkinter</b></u>) was developed to distribute the tool to analysts. One of the challenges of the project was the 
+                            limited number of data points for each material, but by defining classes of similar materials, this issue was 
+                            overcome. The signals used for analysis are also stored for future model improvement. Previously, this 
+                            analysis took about 30 minutes for experienced analysts and hours for new analysts, but with this solution, 
+                            it can now be performed in seconds with an accuracy of approximately 75%, while also removing the need 
+                            for technical knowledge to interpret the signal (democratizing the analysis). For this project, constant 
+                            <u><b>communication and meetings with other departments</b></u> were essential to collect data and monitor software 
+                            performance. 
+                        </div>
+
+                        <div class="braskem_subitem inner_topics">
+                            <p>●pandas</p> <p>●numpy</p> <p>●Tkinter</p> <p>●scikit-learn</p> <p>●scipy</p>
+                        </div>
+
+                        <div class="braskem_subitem">
+                            <img src="assets/signal_comparator.jpeg">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="braskem_item">
+                    <div class="braskem_item_title">Reconstruction of Overlapping Signals – ML Clusterization</div>
+                    
+                    <div class="braskem_inner">
+                        <div class="inner_desc">
+                            Development of a machine learning script using Gaussian Mixture Model <b><u>clustering</u></b> (sklearn) to separate 
+                            and reconstruct signals with overlapping peaks, enabling analyses that were previously impossible due to 
+                            peak overlap. The main challenges here were related to the <u><b>consistent and coherent manipulation of signals</b></u> (scipy) and 
+                            <u><b>adapting the solution</b></u> for scenarios with signal behavior variations. These challenges were addressed 
+                            through <u><b>constant collaboration with the technical team</b></u> to better understand the possibilities. Today, the 
+                            script is actively used and was a key component in <b><u>securing patents.</u></b>
                         </div>
 
                         <div class="braskem_subitem inner_topics">
@@ -83,15 +115,17 @@
                     <div class="braskem_item_title">Image Featurization</div>
                     
                     <div class="braskem_inner">
-                        <div class="braskem_subitem inner_desc">
-                            Sometimes we needed information from image, these images often were "engineering" images, so it was not as simple as extracting text from images with tesseract.
-                            In this project we utilized the numerical value represented by every pixel to gather insights and get relevant info from the image. This process of transforming
-                            and object (in this case a image) in numbers (in this case pixels values) is called featurization. In the end we were able to gather the info we needed and also
-                            identify specifics geometry objects in the image with featurization. This project was also deployed online, in order to make it able for whoever needed.
+                        <div class="inner_desc">
+                            Development of a method for extracting important data from microscopy images. Extracting data from 
+                            microscopy images was a challenge for the team, as existing software solutions did not meet specific 
+                            criteria. I developed scripts to identify and extract relevant data related to artifacts in the images (<b><u>OpenCV</u></b>). 
+                            At the end of the process, the collected data was provided through <b><u>practical and easy-to-understand 
+                            visualizations</u></b>. This method was transformed into a web application (<b><u>Streamlit</u></b>), deployed in an Azure 
+                            container (<b><u>Docker</u></b>), and made available to company users, allowing simultaneous access by multiple users. 
                         </div>
 
                         <div class="braskem_subitem inner_topics">
-                            <p>●pandas</p> <p>●numpy</p> <p>●OpenCV</p> <p>●scikt-image</p> <p>●streamlit</p>
+                            <p>●pandas</p> <p>●numpy</p> <p>●docker</p> <p>●OpenCV</p> <p>●streamlit</p>
                         </div>
 
                         <div class="braskem_subitem">
@@ -102,33 +136,10 @@
                 </div>
 
                 <div class="braskem_item">
-                    <div class="braskem_item_title">ML Singal Comparator</div>
-                    
-                    <div class="braskem_inner">
-                        <div class="braskem_subitem inner_desc">
-                            We have a huge set of sigals from a certain analsys technique, each one different from another. And often we receive a new signal,
-                            which can be different from the other or very similar to one of them, and this new peak should be classified taking that in consideration. 
-                            This task of classifying the new signal was done manually by one of the analysts, and considering that we have an enormous set of signal, this task is
-                            extremely difficult and laborious. Knowing that, this project aimed to develop a ML model, trained with the original signals and classify the new signal
-                            based on the orignals.
-                        </div>
-
-                        <div class="braskem_subitem inner_topics">
-                            <p>●pandas</p> <p>●numpy</p> <p>●scikit-learn</p> <p>●scipy</p> <p>●dataiku</p>
-                        </div>
-
-                        <div class="braskem_subitem">
-                            <img src="assets/signal_comparator.jpeg">
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="braskem_item">
                     <div class="braskem_item_title">RPA Extracting</div>
                     
                     <div class="braskem_inner">
-                        <div class="braskem_subitem inner_desc">
+                        <div class="inner_desc">
                             Since braskem is also a research company, it has a lot of equipament to run analytical techniques, and often these equipament have their own software
                             to treat the data the equipament generate. Since braskem is a huge company, a lot of analysis are done and takes a lot of time to work manually on those
                             softwares to extract the data generated by the equipament. Hence, to save analists time, soma automations (RPA) were developed to extract the data automagically
@@ -149,7 +160,7 @@
                     <div class="braskem_item_title">Projects Comparator</div>
                     
                     <div class="braskem_inner">
-                        <div class="braskem_subitem inner_desc">
+                        <div class="inner_desc">
                             Since braskem has a enormous projects portfolio, and those projects are distributed on more than one software (and more than one database),
                             it is hard to compare manually (analysts did it manually) if all the databases have the correct information. 
                             Based on that a program was developed to compare the content on both databases, where a report from each database was generated and than used
@@ -170,7 +181,7 @@
                     <div class="braskem_item_title">Utils Functions</div>
                     
                     <div class="braskem_inner">
-                        <div class="braskem_subitem inner_desc">
+                        <div class="inner_desc">
                             Even if all of the projects didnt work out as expected, in a way or another those projects generated knowledge. Considering that, some parts on the projects
                             were tranformed in functions and keeped separated, in that way we can reuse the code in a future project without having the work of coding it all again.
                             Those functions envolves every kind of task, since image editing, to str comparator or even matrix sampling. The functions were all commented and well documented.

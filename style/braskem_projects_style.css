@@ -18,7 +18,7 @@
 }
 
 .braskem_item_title{
-    margin: 2px;
+    margin: 5px;
     font-weight: bold;
 }
 
@@ -28,6 +28,7 @@
     flex-direction: column;
     align-items: center;
     margin: 5px;
+    padding: 5px;
     min-width: 250px;
     width: 95%;
     background-color: rgba(187, 191, 195, 0.662);
@@ -56,7 +57,9 @@
 }
 
 .inner_desc{
-    width: 60%;
+    
+    width: 100%;
+    text-align: justify;
 }
 
 .inner_topics{
