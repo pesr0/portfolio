@@ -156,6 +156,56 @@ initCanvas();
 createParticles();
 animate();
 
+// ─── About Story Modal ───────────────────────────────────────────────
+const openAboutStoryBtn = document.getElementById('open-about-story-btn');
+const closeAboutStoryBtn = document.getElementById('close-about-story-btn');
+const aboutStoryModal = document.getElementById('about-story-modal');
+const aboutStoryPanel = document.getElementById('about-story-panel');
+
+openAboutStoryBtn.addEventListener('click', () => {
+    aboutStoryModal.classList.remove('hidden');
+    void aboutStoryModal.offsetWidth;
+    aboutStoryModal.classList.remove('opacity-0');
+    aboutStoryPanel.classList.remove('scale-95');
+    aboutStoryPanel.classList.add('scale-100');
+});
+
+closeAboutStoryBtn.addEventListener('click', closeAboutStory);
+
+aboutStoryModal.addEventListener('click', (e) => {
+    if (e.target === aboutStoryModal) closeAboutStory();
+});
+
+function closeAboutStory() {
+    aboutStoryModal.classList.add('opacity-0');
+    aboutStoryPanel.classList.remove('scale-100');
+    aboutStoryPanel.classList.add('scale-95');
+    setTimeout(() => { aboutStoryModal.classList.add('hidden'); }, 300);
+}
+
+aboutStoryModal.addEventListener('mousemove', (e) => {
+    const rect = aboutStoryPanel.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const imgContainer = document.getElementById('about-story-img-container');
+    if (imgContainer) {
+        const rotY = ((x - rect.width / 2) / (rect.width / 2)) * 10;
+        const rotX = ((y - rect.height / 2) / (rect.height / 2)) * -10;
+        imgContainer.style.transform = `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+    }
+
+    const xPct = (x / rect.width) * 100;
+    const yPct = (y / rect.height) * 100;
+    aboutStoryPanel.style.background = `radial-gradient(circle at ${xPct}% ${yPct}%, rgba(0, 243, 255, 0.07) 0%, transparent 55%), rgba(20, 20, 30, 0.6)`;
+});
+
+aboutStoryModal.addEventListener('mouseleave', () => {
+    const imgContainer = document.getElementById('about-story-img-container');
+    if (imgContainer) imgContainer.style.transform = '';
+    aboutStoryPanel.style.background = '';
+});
+
 // ─── Archive Modal ────────────────────────────────────────────────────
 const openArchiveBtn = document.getElementById('open-archive-btn');
 const closeArchiveBtn = document.getElementById('close-archive-btn');
@@ -424,6 +474,18 @@ function loadAbout() {
     const img = document.getElementById('about-image');
     if (data.image_path) img.src = data.image_path;
     if (data.image_alt) img.alt = data.image_alt;
+
+    const storyImg = document.getElementById('about-story-image');
+    if (storyImg && data.image_path) storyImg.src = data.image_path;
+
+    const storyContainer = document.getElementById('about-story-text');
+    if (storyContainer) {
+        (data.full_description_paragraphs || []).forEach(para => {
+            const p = document.createElement('p');
+            p.innerHTML = para;
+            storyContainer.appendChild(p);
+        });
+    }
 }
 
 function loadExperiences() {
