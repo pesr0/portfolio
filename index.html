@@ -302,31 +302,59 @@
     </div>
 
     <!-- Project Archive Modal -->
-    <div id="project-archive" class="fixed inset-0 z-[100] hidden bg-dark-100/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+    <div id="project-archive" class="fixed inset-0 z-[100] hidden bg-dark-100/95 backdrop-blur-lg flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
 
-        <div class="glass-panel w-full max-w-6xl h-[85vh] rounded-2xl border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="archive-panel">
+        <div class="w-full max-w-6xl h-[88vh] rounded-2xl border border-gray-700/60 flex flex-col overflow-hidden shadow-[0_0_80px_rgba(176,38,255,0.12)] transform scale-95 transition-transform duration-300" id="archive-panel" style="background: rgba(15, 15, 25, 0.92); backdrop-filter: blur(16px);">
 
-            <div class="flex justify-between items-center p-4 border-b border-gray-700 bg-dark-200/80">
+            <!-- Title bar -->
+            <div class="flex justify-between items-center px-5 py-3 border-b border-gray-700/50" style="background: rgba(22, 22, 40, 0.8);">
                 <div class="flex items-center gap-3">
-                    <i class="fas fa-terminal text-neon-purple"></i>
-                    <span class="font-mono text-sm text-gray-300">~/projects/archive</span>
+                    <div class="flex gap-1.5">
+                        <div class="w-2.5 h-2.5 rounded-full bg-red-500/60"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/60"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-green-500/60"></div>
+                    </div>
+                    <div class="w-px h-4 bg-gray-700 mx-1"></div>
+                    <i class="fas fa-terminal text-neon-purple text-xs"></i>
+                    <span class="font-mono text-sm text-gray-400">~/projects/archive</span>
+                    <span class="text-gray-600 font-mono text-xs" id="archive-project-count"></span>
                 </div>
-                <button id="close-archive-btn" class="text-gray-400 hover:text-neon-400 transition-colors p-2">
-                    <i class="fas fa-times text-xl"></i>
+                <button id="close-archive-btn" class="text-gray-500 hover:text-white transition-colors p-1.5 rounded-md hover:bg-white/5">
+                    <i class="fas fa-times text-sm"></i>
                 </button>
+            </div>
+
+            <!-- Search bar -->
+            <div class="px-5 py-3 border-b border-gray-700/50" style="background: rgba(18, 18, 32, 0.6);">
+                <div class="relative">
+                    <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none"></i>
+                    <input
+                        id="archive-search"
+                        type="text"
+                        placeholder="Search by name, technology or topic..."
+                        class="w-full rounded-lg pl-9 pr-9 py-2.5 font-mono text-sm text-gray-300 placeholder-gray-600 focus:outline-none transition-colors border"
+                        style="background: rgba(10, 10, 20, 0.7); border-color: rgba(100, 100, 130, 0.3);"
+                        onfocus="this.style.borderColor='rgba(176,38,255,0.6)'"
+                        onblur="this.style.borderColor='rgba(100,100,130,0.3)'"
+                    >
+                    <button id="archive-search-clear" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-300 transition-colors hidden">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                </div>
             </div>
 
             <div class="flex flex-1 overflow-hidden flex-col md:flex-row">
 
                 <!-- Sidebar Folders — gerada via JS a partir dos sub_topic dos projetos -->
-                <div class="w-full md:w-64 border-b md:border-b-0 md:border-r border-gray-700 bg-dark-200/40 p-4 overflow-y-auto">
-                    <ul class="space-y-2 font-mono text-sm flex md:flex-col overflow-x-auto md:overflow-x-visible pb-2 md:pb-0" id="folder-list">
+                <div class="w-full md:w-52 border-b md:border-b-0 md:border-r border-gray-700/50 p-3 overflow-y-auto flex-shrink-0 transition-opacity duration-200" id="folder-sidebar" style="background: rgba(18, 18, 30, 0.5);">
+                    <p class="text-gray-700 font-mono text-xs uppercase tracking-widest px-2 mb-3">Folders</p>
+                    <ul class="space-y-1 font-mono text-sm flex md:flex-col overflow-x-auto md:overflow-x-visible pb-2 md:pb-0" id="folder-list">
                     </ul>
                 </div>
 
                 <!-- Content Grid -->
-                <div class="flex-1 p-6 overflow-y-auto bg-dark-100/30">
-                    <div id="folder-content" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex-1 p-5 overflow-y-auto" style="background: rgba(10, 10, 18, 0.3);">
+                    <div id="folder-content" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     </div>
                 </div>
 
