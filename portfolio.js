@@ -786,6 +786,28 @@ function loadContact() {
     const emailDisplayEl = document.getElementById('contact-email-display');
     if (emailDisplayEl && data.email) emailDisplayEl.textContent = data.email;
 
+    const profileLinks = document.getElementById('about-profile-links');
+    if (profileLinks) {
+        const linkDefs = [
+            { url: data.cv_url,           icon: 'fas fa-file-arrow-down', label: 'CV',      color: 'neon-green'  },
+            { url: data.social?.linkedin, icon: 'fab fa-linkedin',        label: 'LinkedIn', color: 'neon-blue'   },
+            { url: data.social?.github,   icon: 'fab fa-github',          label: 'GitHub',   color: 'neon-purple' },
+        ];
+        linkDefs.forEach(({ url, icon, label, color }) => {
+            const safe = sanitizeUrl(url);
+            if (!safe || safe === '#') return;
+            const a = document.createElement('a');
+            a.href = safe;
+            a.target = '_blank';
+            a.className = `flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border font-mono text-xs transition-all border-${color}/30 text-${color} hover:bg-${color}/10 hover:border-${color}`;
+            const i = document.createElement('i');
+            i.className = icon;
+            a.appendChild(i);
+            a.appendChild(document.createTextNode(label));
+            profileLinks.appendChild(a);
+        });
+    }
+
     const socialIcons = {
         github:   'fab fa-github',
         linkedin: 'fab fa-linkedin',
