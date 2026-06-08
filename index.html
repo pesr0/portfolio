@@ -1,149 +1,1026 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>portfolio - Pedro</title>
-        <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="style/reset.css">
-        <link rel="stylesheet" href="style/body_style.css">
-        <link rel="stylesheet" href="style/main_style.css">
-        <link rel="stylesheet" href="style/header_style.css">
-        <link rel="stylesheet" href="style/landing_style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
-    </head>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio</title>
 
-    <body>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        <header>
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-            <p id="title_btn">portfolio - Pedro</p>
+    <!-- Google Fonts (Inter e JetBrains Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-            <nav>
-                
-                <div>
-                    <button class="dropdown_btn"><a href="projects.html">projects</a></button>
-                    <ul class="dropdown_menu">
-                        <li><a target="_blank" href="https://github.com/pesr0/mercado_livre_api_data_upload">ETL Mercado Livre's API</a></li>
-                        <li><a href="braskem_projects.html">Braskem Internship Projects</a></li>
-                        <li><a href="projects_ml_from_scratch.html">ML From Scratch</a></li>
-                        <li><a target="_blank" href="https://github.com/pesr0/Desafio2_ONE">Java Currency Converter</a></li>
-                        <li><a target="_blank" href="https://pesr0.github.io/wpp-init-chat/">WhatsApp Chat Starter</a></li>
-                        <li><a target="_blank" href="https://pesr0.github.io/Desafio1_ONE/">Decoder (1 project ever done)</a></li>
-                        <li><a target="_blank" href="https://pesr0.github.io/to-do-list/">To-Do List</a></li>
-                    </ul>
-                </div>
-                
-                <button id="aboutme_btn"><a href="aboutme_contact.html">about me & contact</a></button>
-                
-            </nav>
+    <!-- Configuração do Tailwind -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        dark: {
+                            100: '#1a1a2e',
+                            200: '#16213e',
+                            300: '#0f3460',
+                            400: '#e94560',
+                        },
+                        neon: {
+                            blue: '#00f3ff',
+                            purple: '#b026ff',
+                            green: '#00ff9d',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
-        </header>
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+            /* Esconde a barra de rolagem padrão para um visual mais limpo */
+            scrollbar-width: thin;
+            scrollbar-color: #00f3ff #050505;
+        }
 
-        <main>
-            
-            <div id="landing_page">
-                
-                <div id="landing_inner_container">
+        /* Fundo dinâmico que reage ao mouse */
+        #interactive-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 243, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(176, 38, 255, 0.05) 0%, transparent 40%);
+            transition: background 0.3s ease-out;
+            pointer-events: none;
+        }
 
-                    <div id="landing_links_box">
-                        <p class="main_title">useful links</p>
-                        <a href="https://www.linkedin.com/in/pedro-tonom/" target="_blank"><img src="assets/linkedin.svg" title="LinkedIn Logo"></a>
-                        <a href="https://github.com/pesr0" target="_blank"><img src="assets/github.svg" title="github Logo"></a>
-                        <a href="https://drive.google.com/file/d/1lvbJE6Gsl7inCNoil7ITKEEwlNEdowNN/view?usp=sharing" target="_blank"><img src="assets/resume.svg" title="Hyperlink Resume"></a>
+        /* Pontos da malha de dados no fundo */
+        .data-point {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.5s ease;
+        }
+
+        .data-point.active {
+            background: #00f3ff;
+            box-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
+            transform: scale(1.5);
+        }
+
+        /* Efeito Glassmorphism */
+        .glass-panel {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 243, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 243, 255, 0.1);
+        }
+
+        /* Texto em gradiente */
+        .text-gradient {
+            background: linear-gradient(to right, #00f3ff, #b026ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 243, 255, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 243, 255, 0.6);
+        }
+
+        /* Máscara de cursor personalizado */
+        .cursor-glow {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0,243,255,0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+            opacity: 0;
+        }
+
+        /* Cartões de Projeto - Efeito Hover Reveal */
+        .project-card .project-content {
+            transform: translateY(20px);
+            opacity: 0.8;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .project-card:hover .project-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .code-block {
+            background: #0d1117;
+            border-left: 3px solid #b026ff;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Nav Link FX */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #00f3ff;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-neon-purple selection:text-white">
+
+    <!-- Cursor Glow Effect -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+
+    <!-- Background Interativo -->
+    <div id="interactive-bg">
+        <canvas id="network-canvas"></canvas>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="glass-panel mx-auto max-w-7xl px-6 py-4 mt-4 rounded-2xl flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold tracking-tighter">
+                <span class="text-white">Pedro's</span><span class="text-neon-blue">.Portfolio</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="nav-link text-gray-300 hover:text-white font-mono text-sm tracking-wide">01. Home</a>
+                <a href="#about" class="nav-link text-gray-300 hover:text-white font-mono text-sm tracking-wide">02. About</a>
+                <a href="#experience" class="nav-link text-gray-300 hover:text-white font-mono text-sm tracking-wide">03. Experience</a>
+                <a href="#projects" class="nav-link text-gray-300 hover:text-white font-mono text-sm tracking-wide">04. Projects</a>
+                <a href="#contact" class="px-5 py-2 border border-neon-blue text-neon-blue rounded-lg hover:bg-neon-blue hover:text-dark-100 transition-colors font-mono text-sm">
+                    Contact
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-gray-300 hover:text-white" id="mobile-menu-btn">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div class="md:hidden hidden absolute top-full left-0 w-full px-6 mt-2" id="mobile-menu">
+            <div class="glass-panel rounded-2xl flex flex-col p-6 space-y-4">
+                <a href="#home" class="text-gray-300 hover:text-neon-blue font-mono">01. Home</a>
+                <a href="#about" class="text-gray-300 hover:text-neon-blue font-mono">02. About</a>
+                <a href="#experience" class="text-gray-300 hover:text-neon-blue font-mono">03. Experience</a>
+                <a href="#projects" class="text-gray-300 hover:text-neon-blue font-mono">04. Projects</a>
+                <a href="#contact" class="text-neon-blue font-mono mt-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative z-10">
+
+        <!-- Hero Section (Landing Page) -->
+        <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-20 relative">
+            <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+                <div class="space-y-6 z-10" id="hero-text">
+                    <p id="hero-greeting" class="text-neon-green font-mono tracking-wider"></p>
+                    <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-white leading-tight">
+                        <span id="hero-name"></span><br>
+                        <span id="hero-title" class="text-gradient"></span>
+                    </h1>
+                    <p id="hero-description" class="text-gray-400 text-lg md:text-xl max-w-lg font-light leading-relaxed"></p>
+
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="#projects" class="px-8 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+                            See Projects
+                        </a>
+                        <a id="hero-github" href="#" target="_blank" class="px-8 py-3 border border-gray-600 text-white rounded-lg hover:border-white hover:bg-white/5 transition-all flex items-center gap-2">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
                     </div>
-
-                    <div id="landing_main_content">
-
-                        <div id="landing_mini_aboutme">
-
-                            <div>
-                                Hi there 👋! Welcome to my portfolio! Here you will find some of the
-                                projects I already worked on, and a little of my journey till now on
-                                about me section.
-                                <br><br>
-                                Right below ⬇, you will find the main projects I worked on till today, 
-                                however you may check "projects" section for more projects!
-                            </div>
-
-                            <div>
-                                These are some of the topics I am interested at and some tehcnologies I know:
-                                <br><br>
-                                <li class="skill_item">Data Science, ML & Dataviz 📈</li>
-                                <li class="skill_item">Python, SQL, C, Java & learning C# 💻</li>
-                                <li class="skill_item">Git, Docker & AWS ☁</li>
-                                <li class="skill_item">Math/Statistical Skills 🧮</li>
-                            </div>
-
-                            <div  style="display: flex; justify-content: center;">
-                                <img id="mini_aboutme_pic" src="assets/aboutpic.jpg">
-                            </div>
-
-                        </div>
-
-                        <div id="landing_buttons_box">
-
-                            <a href="projects.html"><button class="landing_button">Projects</button></a>
-                            <a href="aboutme_contact.html"><button class="landing_button">About Me & Contact</button></a>
-                            <a href="mailto: pedrotmartin00@hotmail.com"><button class="landing_button">e-mail me!</button></a>
-
-                        </div>
-
-                    </div>
-
                 </div>
 
-                <div class="horizontal_bar"></div>
-                
-                <div id="landing_projects">
-
-                    <b> 🏆 Main Projects 🏆</b>
-
-                    <div class="main_projects">
-                        
-                        <div class="top_project">
-                            <a href="https://github.com/pesr0/mercado_livre_api_data_upload">
-
-                                ETL Mercado Livre's API
-
-                                <img src="assets/ml_api.png">
-                            </a>
+                <!-- Representação visual (Terminal/Code) -->
+                <div class="hidden lg:block relative z-10 perspective-1000">
+                    <div class="glass-panel rounded-xl overflow-hidden transform rotate-y-[-10deg] rotate-x-[5deg] hover:rotate-0 transition-transform duration-500 animate-float">
+                        <div class="bg-gray-900 px-4 py-2 flex items-center gap-2 border-b border-gray-800">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="text-gray-500 text-xs ml-2 font-mono">model_training.py</span>
                         </div>
-
-                        <div class="top_project">
-                            <a href="braskem_projects.html">
-
-                                Braskem Projects
-
-                                <img src="assets/braskem_logo.png">
-                            </a>
+                        <div class="p-6 code-block text-sm sm:text-base leading-relaxed">
+                            <span class="text-pink-500">import</span> <span class="text-white">tensorflow</span> <span class="text-pink-500">as</span> <span class="text-white">tf</span><br>
+                            <span class="text-pink-500">from</span> <span class="text-white">sklearn.model_selection</span> <span class="text-pink-500">import</span> <span class="text-white">train_test_split</span><br><br>
+                            <span class="text-gray-500"># Initializing the Deep Learning model</span><br>
+                            <span class="text-blue-400">def</span> <span class="text-yellow-200">build_model</span><span class="text-white">():</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-white">model = tf.keras.Sequential([</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-white">tf.keras.layers.Dense(</span><span class="text-orange-400">128</span><span class="text-white">, activation=</span><span class="text-green-300">'relu'</span><span class="text-white">),</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-white">tf.keras.layers.Dropout(</span><span class="text-orange-400">0.3</span><span class="text-white">),</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-white">tf.keras.layers.Dense(</span><span class="text-orange-400">10</span><span class="text-white">, activation=</span><span class="text-green-300">'softmax'</span><span class="text-white">)</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-white">])</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-500">return</span> <span class="text-white">model</span><br><br>
+                            <span class="text-white">brain = build_model()</span><br>
+                            <span class="text-white">brain.compile(optimizer=</span><span class="text-green-300">'adam'</span><span class="text-white">, loss=</span><span class="text-green-300">'categorical_crossentropy'</span><span class="text-white">)</span>
+                            <span class="animate-pulse inline-block w-2 h-5 bg-gray-400 ml-1 align-middle"></span>
                         </div>
-
-                        <!-- <div class="top_project">
-                            <a href="">
-
-                                Project Name
-
-                                <img src="">
-                            </a>
-                        </div> -->
-
-                        </div>
-
-                    More projects on projects page...
-
+                    </div>
                 </div>
 
             </div>
-        </main>
 
-        <footer>
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+                <span class="text-gray-500 font-mono text-xs mb-2">scroll</span>
+                <i class="fas fa-chevron-down text-gray-500"></i>
+            </div>
+        </section>
 
-            <p class="item_footer">Pedro Tonom</p>
-            <a class='item_footer' href='https://www.linkedin.com/in/pedro-tonom/' target="_blank"><img src="assets/linkedin.svg" title="LinkedIn"></a>
-            <a class="item_footer" href='https://github.com/pesr0' target="_blank"><img src="assets/github.svg" title="GitHub"></a>
+        <!-- About Section -->
+        <section id="about" class="py-24 px-6 relative">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center gap-4 mb-12">
+                    <span class="text-neon-blue font-mono text-xl">02.</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">About Me</h2>
+                    <div class="h-px bg-gray-700 flex-grow ml-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-12">
+                    <div class="md:col-span-3 space-y-6 text-gray-300 leading-relaxed text-lg">
+                        <div id="about-text"></div>
+                        <ul id="about-skills" class="grid grid-cols-2 gap-2 font-mono text-sm mt-4"></ul>
+                    </div>
+
+                    <div class="md:col-span-2 relative group">
+                        <div class="relative z-10 rounded-xl overflow-hidden glass-panel aspect-square flex items-center justify-center p-2">
+                            <div class="w-full h-full bg-gray-800 rounded-lg overflow-hidden relative">
+                                <img id="about-image" src="" alt="Profile" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <!-- Efeito de sombra atrás da imagem -->
+                        <div class="absolute inset-0 border-2 border-neon-blue rounded-xl translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-24 px-6 relative">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center gap-4 mb-12">
+                    <span class="text-neon-purple font-mono text-xl">03.</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Where I've Worked</h2>
+                    <div class="h-px bg-gray-700 flex-grow ml-4"></div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-8">
+                    <!-- Abas de Empresa — geradas via JS a partir de experiences/ -->
+                    <div id="exp-tabs-container" class="flex md:flex-col overflow-x-auto md:overflow-x-visible border-b md:border-b-0 md:border-l border-gray-700 min-w-[200px] scrollbar-hide">
+                    </div>
+
+                    <!-- Conteúdo das Experiências — gerado via JS -->
+                    <div id="exp-contents-container" class="flex-grow min-h-[300px]">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 px-6 relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-center gap-4 mb-16">
+                    <span class="text-neon-green font-mono text-xl">04.</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Featured Projects</h2>
+                    <div class="h-px bg-gray-700 flex-grow ml-4"></div>
+                </div>
+
+                <!-- Cards dos projetos com tier 1, 2 e 3 — gerados via JS -->
+                <div id="featured-projects" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+
+                <!-- Add Button to Open Project Explorer -->
+                <div class="mt-16 text-center">
+                    <button id="open-archive-btn" class="px-8 py-4 border border-neon-purple text-neon-purple font-mono rounded-lg hover:bg-neon-purple hover:text-white transition-all flex items-center justify-center gap-3 mx-auto shadow-[0_0_15px_rgba(176,38,255,0.2)] hover:shadow-[0_0_25px_rgba(176,38,255,0.5)]">
+                        <i class="fas fa-folder-tree text-xl"></i> Explore All Projects
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-32 px-6 relative text-center">
+            <div class="max-w-2xl mx-auto glass-panel p-12 rounded-2xl relative overflow-hidden">
+                <!-- Efeito de brilho de fundo -->
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-neon-blue opacity-5 blur-[100px] pointer-events-none"></div>
+
+                <p class="text-neon-blue font-mono text-sm mb-4">05. What's next?</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Get In Touch</h2>
+                <p id="contact-availability" class="text-gray-400 text-lg mb-10 leading-relaxed"></p>
+                <a id="contact-email" href="#" class="inline-block px-8 py-4 border border-neon-blue text-neon-blue font-mono rounded-lg hover:bg-neon-blue hover:text-dark-100 transition-all duration-300 shadow-[0_0_10px_rgba(0,243,255,0.2)] hover:shadow-[0_0_20px_rgba(0,243,255,0.5)]">
+                    Diga Olá
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 text-center text-gray-500 font-mono text-sm">
+            <div id="footer-social" class="flex justify-center gap-6 mb-4">
+            </div>
         </footer>
 
-    </body>
-    <script src="script/change_color.js"></script>
+    </main>
+
+    <!-- Project Archive Modal Container -->
+    <div id="project-archive" class="fixed inset-0 z-[100] hidden bg-dark-100/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+
+        <!-- Main Panel -->
+        <div class="glass-panel w-full max-w-6xl h-[85vh] rounded-2xl border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="archive-panel">
+
+            <!-- Header Section -->
+            <div class="flex justify-between items-center p-4 border-b border-gray-700 bg-dark-200/80">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-terminal text-neon-purple"></i>
+                    <span class="font-mono text-sm text-gray-300">~/projects/archive</span>
+                </div>
+
+                <!-- Close Button -->
+                <button id="close-archive-btn" class="text-gray-400 hover:text-neon-400 transition-colors p-2">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Body Section -->
+            <div class="flex flex-1 overflow-hidden flex-col md:flex-row">
+
+                <!-- Sidebar Folders — gerada via JS a partir dos sub_topic dos projetos -->
+                <div class="w-full md:w-64 border-b md:border-b-0 md:border-r border-gray-700 bg-dark-200/40 p-4 overflow-y-auto">
+                    <ul class="space-y-2 font-mono text-sm flex md:flex-col overflow-x-auto md:overflow-x-visible pb-2 md:pb-0" id="folder-list">
+                    </ul>
+                </div>
+
+                <!-- Content Grid -->
+                <div class="flex-1 p-6 overflow-y-auto bg-dark-100/30">
+                    <div id="folder-content" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Dynamic Project Cards Go Here -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── Arquivos de dados ────────────────────────────────────────────────
+         Para adicionar nova experiência: crie experiences/novo.js e acrescente
+         uma tag <script src="experiences/novo.js"> abaixo.
+         Para adicionar novo projeto: idem em projects/.
+    -->
+    <script src="landing.js"></script>
+    <script src="about_me.js"></script>
+    <script src="contact.js"></script>
+
+    <script src="experiences/kumulus.js"></script>
+    <script src="experiences/braskem.js"></script>
+    
+    <script src="projects/porsche_cup.js"></script>
+    <script src="projects/local_llm.js"></script>
+    <script src="projects/multimodal_signals_classifier.js"></script>
+
+    <script>
+        // ─── UI: Menu Mobile ──────────────────────────────────────────────────
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // ─── UI: Navbar ao rolar ──────────────────────────────────────────────
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+            }
+        });
+
+        // ─── UI: Cursor Glow ──────────────────────────────────────────────────
+        const cursorGlow = document.getElementById('cursor-glow');
+
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+            cursorGlow.style.opacity = '1';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursorGlow.style.opacity = '0';
+        });
+
+        // ─── Canvas: Animação de Rede Neural no Background ────────────────────
+        const canvas = document.getElementById('network-canvas');
+        const ctx = canvas.getContext('2d');
+        const interactiveBg = document.getElementById('interactive-bg');
+
+        let width, height;
+        let particles = [];
+
+        const colors = ['rgba(0, 243, 255, 0.5)', 'rgba(176, 38, 255, 0.5)', 'rgba(255, 255, 255, 0.2)'];
+
+        function initCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.baseX = this.x;
+                this.baseY = this.y;
+                this.density = (Math.random() * 30) + 1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+            update(mouse) {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > height) this.vy = -this.vy;
+
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                let forceDirectionX = dx / distance;
+                let forceDirectionY = dy / distance;
+                let maxDistance = 200;
+
+                if (distance < maxDistance) {
+                    let force = (maxDistance - distance) / maxDistance;
+                    let directionX = forceDirectionX * force * this.density;
+                    let directionY = forceDirectionY * force * this.density;
+                    this.x -= directionX * 0.5;
+                    this.y -= directionY * 0.5;
+                }
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            let numParticles = (width * height) / 15000;
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', function(e) {
+            mouse.x = e.x;
+            mouse.y = e.y;
+            let xPercent = (e.x / window.innerWidth) * 100;
+            let yPercent = (e.y / window.innerHeight) * 100;
+            interactiveBg.style.background = `
+                radial-gradient(circle at ${xPercent}% ${yPercent}%, rgba(0, 243, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at ${100 - xPercent}% ${100 - yPercent}%, rgba(176, 38, 255, 0.08) 0%, transparent 50%),
+                #050505
+            `;
+        });
+
+        window.addEventListener('resize', function() {
+            initCanvas();
+            createParticles();
+        });
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x))
+                                 + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+                    if (distance < (width/10) * (height/10)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacityValue * 0.2})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, width, height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].draw();
+                particles[i].update(mouse);
+            }
+            connect();
+        }
+
+        initCanvas();
+        createParticles();
+        animate();
+
+        // Animação de fade-in
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.4s ease-out forwards;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ─── Archive Modal ────────────────────────────────────────────────────
+        const openArchiveBtn = document.getElementById('open-archive-btn');
+        const closeArchiveBtn = document.getElementById('close-archive-btn');
+        const archiveModal = document.getElementById('project-archive');
+        const archivePanel = document.getElementById('archive-panel');
+        const folderContent = document.getElementById('folder-content');
+
+        let archiveData = {};
+        let firstFolderKey = null;
+
+        openArchiveBtn.addEventListener('click', () => {
+            archiveModal.classList.remove('hidden');
+            void archiveModal.offsetWidth;
+            archiveModal.classList.remove('opacity-0');
+            archivePanel.classList.remove('scale-95');
+            archivePanel.classList.add('scale-100');
+            if (firstFolderKey) renderFolder(firstFolderKey);
+        });
+
+        closeArchiveBtn.addEventListener('click', () => {
+            archiveModal.classList.add('opacity-0');
+            archivePanel.classList.remove('scale-100');
+            archivePanel.classList.add('scale-95');
+            setTimeout(() => { archiveModal.classList.add('hidden'); }, 300);
+        });
+
+        function initFolderBtns() {
+            const folderBtns = document.querySelectorAll('.folder-btn');
+            folderBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    folderBtns.forEach(b => {
+                        b.classList.remove('active', 'text-neon-purple', 'bg-neon-purple/10');
+                        b.classList.add('text-gray-400');
+                        const icon = b.querySelector('i');
+                        icon.classList.remove('fa-folder-open');
+                        icon.classList.add('fa-folder');
+                    });
+                    btn.classList.add('active', 'text-neon-purple', 'bg-neon-purple/10');
+                    btn.classList.remove('text-gray-400');
+                    const activeIcon = btn.querySelector('i');
+                    activeIcon.classList.remove('fa-folder');
+                    activeIcon.classList.add('fa-folder-open');
+                    renderFolder(btn.getAttribute('data-folder'));
+                });
+            });
+        }
+
+        function initExpTabs() {
+            const expBtns = document.querySelectorAll('.exp-btn');
+            const expContents = document.querySelectorAll('.exp-content');
+
+            expBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    expBtns.forEach(b => {
+                        b.classList.remove('text-neon-blue', 'bg-neon-blue/10');
+                        if (window.innerWidth >= 768) {
+                            b.classList.remove('border-l-2', 'border-neon-blue');
+                            b.classList.add('border-l-2', 'border-transparent', 'text-gray-400');
+                        } else {
+                            b.classList.remove('border-b-2', 'border-neon-blue');
+                            b.classList.add('border-b-2', 'border-transparent', 'text-gray-400');
+                        }
+                    });
+
+                    btn.classList.add('text-neon-blue', 'bg-neon-blue/10');
+                    btn.classList.remove('text-gray-400');
+                    if (window.innerWidth >= 768) {
+                        btn.classList.add('border-l-2', 'border-neon-blue');
+                        btn.classList.remove('border-transparent');
+                    } else {
+                        btn.classList.add('border-b-2', 'border-neon-blue');
+                        btn.classList.remove('border-transparent');
+                    }
+
+                    expContents.forEach(c => {
+                        c.classList.add('hidden');
+                        c.classList.remove('block');
+                    });
+
+                    const targetContent = document.getElementById(btn.getAttribute('data-target'));
+                    targetContent.classList.remove('hidden');
+                    targetContent.classList.add('block');
+                    targetContent.style.animation = 'none';
+                    targetContent.offsetHeight;
+                    targetContent.style.animation = null;
+                });
+            });
+        }
+
+        // ─── Data Loading ─────────────────────────────────────────────────────
+
+        function sanitizeUrl(url) {
+            if (!url) return '#';
+            const str = String(url).trim();
+            if (/^javascript:/i.test(str)) return '#';
+            return str;
+        }
+
+        function buildLinkAnchor(url, iconClass, className) {
+            const safe = sanitizeUrl(url);
+            const a = document.createElement('a');
+            a.href = safe;
+            a.className = className;
+            if (safe !== '#') a.target = '_blank';
+            const i = document.createElement('i');
+            i.className = iconClass;
+            a.appendChild(i);
+            return a;
+        }
+
+        function renderFolder(folderKey) {
+            folderContent.innerHTML = '';
+            (archiveData[folderKey] || []).forEach(proj => {
+                const card = document.createElement('div');
+                card.className = 'glass-panel p-5 rounded-xl border border-gray-700 hover:border-neon-purple transition-colors animate-fade-in';
+
+                const header = document.createElement('div');
+                header.className = 'flex justify-between items-start mb-3';
+
+                const titleEl = document.createElement('h4');
+                titleEl.className = 'text-lg font-bold text-white';
+                titleEl.textContent = proj.title || '';
+
+                const linksDiv = document.createElement('div');
+                linksDiv.className = 'flex gap-2';
+                if (proj.github_url) linksDiv.appendChild(buildLinkAnchor(proj.github_url, 'fab fa-github', 'text-gray-400 hover:text-white'));
+                if (proj.live_url) linksDiv.appendChild(buildLinkAnchor(proj.live_url, 'fas fa-external-link-alt', 'text-gray-400 hover:text-white ml-2'));
+
+                header.appendChild(titleEl);
+                header.appendChild(linksDiv);
+
+                const descEl = document.createElement('p');
+                descEl.className = 'text-gray-400 text-sm mb-4';
+                descEl.textContent = proj.description || '';
+
+                const techDiv = document.createElement('div');
+                techDiv.className = 'flex flex-wrap gap-2';
+                (proj.tech || []).forEach(t => {
+                    const badge = document.createElement('span');
+                    badge.className = 'text-xs text-neon-blue font-mono bg-neon-blue/10 px-2 py-1 rounded';
+                    badge.textContent = t;
+                    techDiv.appendChild(badge);
+                });
+
+                card.appendChild(header);
+                card.appendChild(descEl);
+                card.appendChild(techDiv);
+                folderContent.appendChild(card);
+            });
+        }
+
+        function loadLanding() {
+            const data = window.PORTFOLIO_LANDING || {};
+            document.getElementById('hero-greeting').textContent = data.greeting || '';
+            document.getElementById('hero-name').textContent = data.name || '';
+            document.getElementById('hero-title').textContent = data.title || '';
+            document.getElementById('hero-description').textContent = data.description || '';
+            const githubEl = document.getElementById('hero-github');
+            if (data.github_url) githubEl.href = sanitizeUrl(data.github_url);
+            if (data.name) document.title = data.name + ' | Portfólio';
+        }
+
+        function loadAbout() {
+            const data = window.PORTFOLIO_ABOUT || {};
+
+            const textContainer = document.getElementById('about-text');
+            // paragraphs suportam HTML para formatação inline (escrito pelo autor em about_me.js)
+            (data.paragraphs || []).forEach(para => {
+                const p = document.createElement('p');
+                p.innerHTML = para;
+                textContainer.appendChild(p);
+            });
+
+            const skillsList = document.getElementById('about-skills');
+            (data.skills || []).forEach(skill => {
+                const li = document.createElement('li');
+                li.className = 'flex items-center gap-2';
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-caret-right text-neon-green';
+                li.appendChild(icon);
+                li.appendChild(document.createTextNode(' ' + skill));
+                skillsList.appendChild(li);
+            });
+
+            const img = document.getElementById('about-image');
+            if (data.image_path) img.src = data.image_path;
+            if (data.image_alt) img.alt = data.image_alt;
+        }
+
+        function loadExperiences() {
+            const experiences = (window.PORTFOLIO_EXPERIENCES || []).slice();
+            experiences.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+            const tabsContainer = document.getElementById('exp-tabs-container');
+            const contentsContainer = document.getElementById('exp-contents-container');
+
+            const colorClasses = {
+                'neon-blue':   'text-neon-blue',
+                'neon-purple': 'text-neon-purple',
+                'neon-green':  'text-neon-green',
+            };
+
+            experiences.forEach((exp, i) => {
+                const jobId = 'job-' + (i + 1);
+                const isFirst = i === 0;
+                const colorClass = colorClasses[exp.color] || 'text-neon-blue';
+
+                const btn = document.createElement('button');
+                btn.className = [
+                    'exp-btn', 'px-6', 'py-3', 'text-left', 'font-mono', 'text-sm',
+                    'border-b-2', 'md:border-b-0', 'md:border-l-2', 'whitespace-nowrap',
+                    isFirst
+                        ? 'border-neon-blue text-neon-blue bg-neon-blue/10'
+                        : 'border-transparent text-gray-400 hover:bg-gray-800 hover:text-white transition-colors'
+                ].join(' ');
+                if (isFirst) btn.classList.add('active');
+                btn.dataset.target = jobId;
+                btn.textContent = exp.company;
+                tabsContainer.appendChild(btn);
+
+                const content = document.createElement('div');
+                content.id = jobId;
+                content.className = 'exp-content ' + (isFirst ? 'block' : 'hidden') + ' animate-fade-in';
+
+                const h3 = document.createElement('h3');
+                h3.className = 'text-xl font-bold text-white';
+                h3.appendChild(document.createTextNode((exp.role || '') + ' '));
+                const compSpan = document.createElement('span');
+                compSpan.className = colorClass;
+                compSpan.textContent = '@ ' + (exp.company || '');
+                h3.appendChild(compSpan);
+
+                const periodEl = document.createElement('p');
+                periodEl.className = 'text-gray-400 font-mono text-sm mt-1 mb-6';
+                periodEl.textContent = exp.period || '';
+
+                const achUl = document.createElement('ul');
+                achUl.className = 'space-y-4 text-gray-300';
+                (exp.achievements || []).forEach(a => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-start gap-3';
+                    const iconEl = document.createElement('i');
+                    iconEl.className = 'fas fa-angle-right ' + colorClass + ' mt-1';
+                    const pEl = document.createElement('p');
+                    pEl.textContent = a;
+                    li.appendChild(iconEl);
+                    li.appendChild(pEl);
+                    achUl.appendChild(li);
+                });
+
+                content.appendChild(h3);
+                content.appendChild(periodEl);
+                content.appendChild(achUl);
+                contentsContainer.appendChild(content);
+            });
+
+            initExpTabs();
+        }
+
+        function loadProjects() {
+            const projects = window.PORTFOLIO_PROJECTS || [];
+
+            archiveData = {};
+            projects.forEach(proj => {
+                const folder = proj.sub_topic || 'Other';
+                if (!archiveData[folder]) archiveData[folder] = [];
+                archiveData[folder].push(proj);
+            });
+            firstFolderKey = Object.keys(archiveData)[0] || null;
+
+            const folderList = document.getElementById('folder-list');
+            Object.keys(archiveData).forEach((key, i) => {
+                const isFirst = i === 0;
+                const li = document.createElement('li');
+                const btn = document.createElement('button');
+                btn.className = [
+                    'folder-btn', 'w-full', 'text-left', 'px-3', 'py-2', 'rounded',
+                    'flex', 'items-center', 'gap-2', 'whitespace-nowrap',
+                    isFirst ? 'active text-neon-purple bg-neon-purple/10' : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800'
+                ].join(' ');
+                btn.dataset.folder = key;
+                const icon = document.createElement('i');
+                icon.className = 'fas ' + (isFirst ? 'fa-folder-open' : 'fa-folder');
+                btn.appendChild(icon);
+                btn.appendChild(document.createTextNode(' ' + key.replace(/_/g, ' ')));
+                li.appendChild(btn);
+                folderList.appendChild(li);
+            });
+            initFolderBtns();
+
+            const accentColors = {
+                'neon-blue':   { text: 'text-neon-blue',   hover: 'group-hover:text-neon-blue',   link: 'hover:text-neon-blue'   },
+                'neon-purple': { text: 'text-neon-purple', hover: 'group-hover:text-neon-purple', link: 'hover:text-neon-purple' },
+                'neon-green':  { text: 'text-neon-green',  hover: 'group-hover:text-neon-green',  link: 'hover:text-neon-green'  },
+            };
+
+            const featuredContainer = document.getElementById('featured-projects');
+            [1, 2, 3].forEach(tier => {
+                const proj = projects.find(p => p.tier === tier);
+                if (!proj) return;
+
+                const colors = accentColors[proj.accent_color] || accentColors['neon-blue'];
+
+                const card = document.createElement('div');
+                card.className = 'project-card glass-panel rounded-xl overflow-hidden group cursor-pointer h-80 relative';
+
+                const bgDiv = document.createElement('div');
+                bgDiv.className = 'absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-20 transition-opacity duration-300';
+                if (proj.background_image) {
+                    const safeImg = sanitizeUrl(proj.background_image);
+                    if (safeImg !== '#') bgDiv.style.backgroundImage = "url('" + safeImg + "')";
+                }
+
+                const gradDiv = document.createElement('div');
+                gradDiv.className = 'absolute inset-0 bg-gradient-to-t from-dark-100 via-dark-100/80 to-transparent';
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'relative h-full p-6 flex flex-col justify-end z-10 project-content';
+
+                const iconRow = document.createElement('div');
+                iconRow.className = 'flex justify-between items-center mb-2';
+
+                const iconEl = document.createElement('i');
+                iconEl.className = (proj.icon || 'fas fa-folder-open') + ' text-4xl ' + colors.text;
+
+                const linksDiv = document.createElement('div');
+                linksDiv.className = 'flex gap-3';
+                if (proj.github_url) linksDiv.appendChild(buildLinkAnchor(proj.github_url, 'fab fa-github text-xl', 'text-gray-300 ' + colors.link + ' transition-colors'));
+                if (proj.live_url) linksDiv.appendChild(buildLinkAnchor(proj.live_url, 'fas fa-external-link-alt text-xl', 'text-gray-300 ' + colors.link + ' transition-colors'));
+
+                iconRow.appendChild(iconEl);
+                iconRow.appendChild(linksDiv);
+
+                const titleEl = document.createElement('h3');
+                titleEl.className = 'text-2xl font-bold text-white mb-2 ' + colors.hover + ' transition-colors';
+                titleEl.textContent = proj.title || '';
+
+                const descEl = document.createElement('p');
+                descEl.className = 'text-gray-400 text-sm mb-4 line-clamp-3';
+                descEl.textContent = proj.description || '';
+
+                const techDiv = document.createElement('div');
+                techDiv.className = 'flex flex-wrap gap-2 font-mono text-xs text-gray-500';
+                (proj.tech || []).forEach(t => {
+                    const span = document.createElement('span');
+                    span.textContent = t;
+                    techDiv.appendChild(span);
+                });
+
+                contentDiv.appendChild(iconRow);
+                contentDiv.appendChild(titleEl);
+                contentDiv.appendChild(descEl);
+                contentDiv.appendChild(techDiv);
+
+                card.appendChild(bgDiv);
+                card.appendChild(gradDiv);
+                card.appendChild(contentDiv);
+                featuredContainer.appendChild(card);
+            });
+        }
+
+        function loadContact() {
+            const data = window.PORTFOLIO_CONTACT || {};
+
+            const availEl = document.getElementById('contact-availability');
+            if (availEl) availEl.textContent = data.availability_message || '';
+
+            const emailEl = document.getElementById('contact-email');
+            if (emailEl) {
+                if (data.email) emailEl.href = `mailto:${data.email}`;
+                if (data.cta_label) emailEl.textContent = data.cta_label;
+            }
+
+            const socialIcons = {
+                github:   'fab fa-github',
+                linkedin: 'fab fa-linkedin',
+                kaggle:   'fab fa-kaggle',
+                twitter:  'fab fa-twitter',
+            };
+
+            const socialContainer = document.getElementById('footer-social');
+            if (data.social && socialContainer) {
+                Object.entries(data.social).forEach(([platform, url]) => {
+                    const a = document.createElement('a');
+                    a.href = sanitizeUrl(url);
+                    a.className = 'hover:text-neon-blue transition-colors';
+                    if (sanitizeUrl(url) !== '#') a.target = '_blank';
+                    const icon = document.createElement('i');
+                    icon.className = (socialIcons[platform] || 'fas fa-link') + ' text-xl';
+                    a.appendChild(icon);
+                    socialContainer.appendChild(a);
+                });
+            }
+
+            const nameEl = document.getElementById('footer-name');
+            if (nameEl && data.footer_name) nameEl.textContent = data.footer_name;
+        }
+
+        function initPortfolio() {
+            try {
+                loadLanding();
+                loadAbout();
+                loadContact();
+                loadExperiences();
+                loadProjects();
+            } catch (err) {
+                console.error('Erro ao inicializar portfólio:', err);
+            }
+        }
+
+        initPortfolio();
+    </script>
+</body>
 </html>
