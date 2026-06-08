@@ -8,6 +8,10 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- React 18 (para OrganicDataViz.jsx) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
     <!-- FontAwesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -128,32 +132,8 @@
                     </div>
                 </div>
 
-                <!-- Representação visual (Terminal/Code) -->
-                <div class="hidden lg:block relative z-10 perspective-1000">
-                    <div class="glass-panel rounded-xl overflow-hidden transform rotate-y-[-10deg] rotate-x-[5deg] hover:rotate-0 transition-transform duration-500 animate-float">
-                        <div class="bg-gray-900 px-4 py-2 flex items-center gap-2 border-b border-gray-800">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            <span class="text-gray-500 text-xs ml-2 font-mono">model_training.py</span>
-                        </div>
-                        <div class="p-6 code-block text-sm sm:text-base leading-relaxed">
-                            <span class="text-pink-500">import</span> <span class="text-white">tensorflow</span> <span class="text-pink-500">as</span> <span class="text-white">tf</span><br>
-                            <span class="text-pink-500">from</span> <span class="text-white">sklearn.model_selection</span> <span class="text-pink-500">import</span> <span class="text-white">train_test_split</span><br><br>
-                            <span class="text-gray-500"># Initializing the Deep Learning model</span><br>
-                            <span class="text-blue-400">def</span> <span class="text-yellow-200">build_model</span><span class="text-white">():</span><br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-white">model = tf.keras.Sequential([</span><br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-white">tf.keras.layers.Dense(</span><span class="text-orange-400">128</span><span class="text-white">, activation=</span><span class="text-green-300">'relu'</span><span class="text-white">),</span><br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-white">tf.keras.layers.Dropout(</span><span class="text-orange-400">0.3</span><span class="text-white">),</span><br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-white">tf.keras.layers.Dense(</span><span class="text-orange-400">10</span><span class="text-white">, activation=</span><span class="text-green-300">'softmax'</span><span class="text-white">)</span><br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-white">])</span><br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-pink-500">return</span> <span class="text-white">model</span><br><br>
-                            <span class="text-white">brain = build_model()</span><br>
-                            <span class="text-white">brain.compile(optimizer=</span><span class="text-green-300">'adam'</span><span class="text-white">, loss=</span><span class="text-green-300">'categorical_crossentropy'</span><span class="text-white">)</span>
-                            <span class="animate-pulse inline-block w-2 h-5 bg-gray-400 ml-1 align-middle"></span>
-                        </div>
-                    </div>
-                </div>
+                <!-- Visualização orgânica de dados -->
+                <div id="hero-viz" class="hidden lg:flex items-center justify-center relative z-10 animate-float" style="filter: drop-shadow(0 0 24px rgba(0,243,255,0.12))"></div>
 
             </div>
 
@@ -405,6 +385,9 @@
 
     <!-- Lógica principal do portfólio -->
     <script src="portfolio.js"></script>
+
+    <!-- Visualização orgânica da hero section (React + canvas, sem Babel) -->
+    <script src="OrganicDataViz.jsx"></script>
 
 </body>
 </html>
