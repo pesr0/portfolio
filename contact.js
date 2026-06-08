@@ -9,5 +9,7 @@ window.PORTFOLIO_CONTACT = {
         kaggle:   '#',
     },
 
+    cv_url: 'https://drive.google.com/file/d/1lvbJE6Gsl7inCNoil7ITKEEwlNEdowNN/view?usp=drive_link',
+
     footer_name: 'Me'
 };
