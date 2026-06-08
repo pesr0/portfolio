@@ -212,11 +212,16 @@ const closeArchiveBtn = document.getElementById('close-archive-btn');
 const archiveModal = document.getElementById('project-archive');
 const archivePanel = document.getElementById('archive-panel');
 const folderContent = document.getElementById('folder-content');
+const archiveSearch = document.getElementById('archive-search');
+const archiveSearchClear = document.getElementById('archive-search-clear');
 
 let archiveData = {};
 let firstFolderKey = null;
 
 openArchiveBtn.addEventListener('click', () => {
+    archiveSearch.value = '';
+    archiveSearchClear.classList.add('hidden');
+    setSidebarSearchMode(false);
     archiveModal.classList.remove('hidden');
     void archiveModal.offsetWidth;
     archiveModal.classList.remove('opacity-0');
@@ -232,19 +237,46 @@ closeArchiveBtn.addEventListener('click', () => {
     setTimeout(() => { archiveModal.classList.add('hidden'); }, 300);
 });
 
+archiveSearch.addEventListener('input', () => {
+    const q = archiveSearch.value.trim().toLowerCase();
+    archiveSearchClear.classList.toggle('hidden', q === '');
+    setSidebarSearchMode(q !== '');
+    if (q) {
+        renderSearch(q);
+    } else if (firstFolderKey) {
+        renderFolder(firstFolderKey);
+    }
+});
+
+archiveSearchClear.addEventListener('click', () => {
+    archiveSearch.value = '';
+    archiveSearchClear.classList.add('hidden');
+    setSidebarSearchMode(false);
+    if (firstFolderKey) renderFolder(firstFolderKey);
+});
+
+function setSidebarSearchMode(isSearch) {
+    const sidebar = document.getElementById('folder-sidebar');
+    if (sidebar) sidebar.style.opacity = isSearch ? '0.35' : '1';
+}
+
 function initFolderBtns() {
     const folderBtns = document.querySelectorAll('.folder-btn');
     folderBtns.forEach(btn => {
         btn.addEventListener('click', () => {
+            archiveSearch.value = '';
+            archiveSearchClear.classList.add('hidden');
+            setSidebarSearchMode(false);
+
             folderBtns.forEach(b => {
-                b.classList.remove('active', 'text-neon-purple', 'bg-neon-purple/10');
-                b.classList.add('text-gray-400');
+                b.classList.remove('active', 'text-neon-purple', 'bg-neon-purple/10', 'border-neon-purple/20');
+                b.classList.add('text-gray-500', 'border-transparent');
                 const icon = b.querySelector('i');
                 icon.classList.remove('fa-folder-open');
                 icon.classList.add('fa-folder');
             });
-            btn.classList.add('active', 'text-neon-purple', 'bg-neon-purple/10');
-            btn.classList.remove('text-gray-400');
+            btn.classList.add('active', 'text-neon-purple', 'bg-neon-purple/10', 'border-neon-purple/20');
+            btn.classList.remove('text-gray-500', 'border-transparent');
             const activeIcon = btn.querySelector('i');
             activeIcon.classList.remove('fa-folder');
             activeIcon.classList.add('fa-folder-open');
@@ -397,45 +429,116 @@ function buildLinkAnchor(url, iconClass, className) {
     return a;
 }
 
+function renderProjectCard(proj, showSubTopic) {
+    const card = document.createElement('div');
+    card.className = 'relative rounded-xl border border-gray-700/50 hover:border-neon-purple/60 transition-all duration-200 animate-fade-in overflow-hidden group/card cursor-default';
+    card.style.background = 'rgba(18, 18, 30, 0.7)';
+
+    const accentBar = document.createElement('div');
+    accentBar.className = 'absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-neon-purple via-neon-blue/40 to-transparent opacity-60 group-hover/card:opacity-100 transition-opacity';
+    card.appendChild(accentBar);
+
+    const inner = document.createElement('div');
+    inner.className = 'p-5';
+
+    const headerRow = document.createElement('div');
+    headerRow.className = 'flex justify-between items-start gap-3 mb-3';
+
+    const leftMeta = document.createElement('div');
+    leftMeta.className = 'flex-1 min-w-0';
+
+    if (showSubTopic && proj.sub_topic) {
+        const topicBadge = document.createElement('span');
+        topicBadge.className = 'inline-block text-xs font-mono px-2 py-0.5 rounded-full bg-neon-purple/10 text-neon-purple border border-neon-purple/20 mb-2';
+        topicBadge.textContent = proj.sub_topic.replace(/_/g, ' ');
+        leftMeta.appendChild(topicBadge);
+    }
+
+    const titleEl = document.createElement('h4');
+    titleEl.className = 'text-sm font-bold text-white group-hover/card:text-neon-purple transition-colors leading-snug';
+    titleEl.textContent = proj.title || '';
+    leftMeta.appendChild(titleEl);
+
+    const linksDiv = document.createElement('div');
+    linksDiv.className = 'flex gap-3 flex-shrink-0 mt-0.5';
+    if (proj.github_url) linksDiv.appendChild(buildLinkAnchor(proj.github_url, 'fab fa-github', 'text-gray-600 hover:text-white transition-colors text-sm'));
+    if (proj.live_url && sanitizeUrl(proj.live_url) !== '#') linksDiv.appendChild(buildLinkAnchor(proj.live_url, 'fas fa-external-link-alt', 'text-gray-600 hover:text-white transition-colors text-sm'));
+
+    headerRow.appendChild(leftMeta);
+    headerRow.appendChild(linksDiv);
+
+    const descEl = document.createElement('p');
+    descEl.className = 'text-gray-500 text-xs leading-relaxed mb-4';
+    descEl.textContent = proj.description || '';
+
+    const techDiv = document.createElement('div');
+    techDiv.className = 'flex flex-wrap gap-1.5';
+    (proj.tech || []).forEach(t => {
+        const badge = document.createElement('span');
+        badge.className = 'text-xs font-mono px-2 py-0.5 rounded-md text-neon-blue bg-neon-blue/8 border border-neon-blue/15';
+        badge.style.background = 'rgba(0,243,255,0.06)';
+        badge.textContent = t;
+        techDiv.appendChild(badge);
+    });
+
+    inner.appendChild(headerRow);
+    inner.appendChild(descEl);
+    inner.appendChild(techDiv);
+    card.appendChild(inner);
+    return card;
+}
+
 function renderFolder(folderKey) {
     folderContent.innerHTML = '';
-    (archiveData[folderKey] || []).forEach(proj => {
-        const card = document.createElement('div');
-        card.className = 'glass-panel p-5 rounded-xl border border-gray-700 hover:border-neon-purple transition-colors animate-fade-in';
+    const projects = archiveData[folderKey] || [];
+    projects.forEach(proj => folderContent.appendChild(renderProjectCard(proj, false)));
+    updateProjectCount(projects.length, null);
+}
 
-        const header = document.createElement('div');
-        header.className = 'flex justify-between items-start mb-3';
-
-        const titleEl = document.createElement('h4');
-        titleEl.className = 'text-lg font-bold text-white';
-        titleEl.textContent = proj.title || '';
-
-        const linksDiv = document.createElement('div');
-        linksDiv.className = 'flex gap-2';
-        if (proj.github_url) linksDiv.appendChild(buildLinkAnchor(proj.github_url, 'fab fa-github', 'text-gray-400 hover:text-white'));
-        if (proj.live_url) linksDiv.appendChild(buildLinkAnchor(proj.live_url, 'fas fa-external-link-alt', 'text-gray-400 hover:text-white ml-2'));
-
-        header.appendChild(titleEl);
-        header.appendChild(linksDiv);
-
-        const descEl = document.createElement('p');
-        descEl.className = 'text-gray-400 text-sm mb-4';
-        descEl.textContent = proj.description || '';
-
-        const techDiv = document.createElement('div');
-        techDiv.className = 'flex flex-wrap gap-2';
-        (proj.tech || []).forEach(t => {
-            const badge = document.createElement('span');
-            badge.className = 'text-xs text-neon-blue font-mono bg-neon-blue/10 px-2 py-1 rounded';
-            badge.textContent = t;
-            techDiv.appendChild(badge);
-        });
-
-        card.appendChild(header);
-        card.appendChild(descEl);
-        card.appendChild(techDiv);
-        folderContent.appendChild(card);
+function renderSearch(query) {
+    folderContent.innerHTML = '';
+    const allProjects = Object.values(archiveData).flat();
+    const filtered = allProjects.filter(proj => {
+        const haystack = [
+            proj.title || '',
+            proj.description || '',
+            ...(proj.tech || []),
+            proj.sub_topic || ''
+        ].join(' ').toLowerCase();
+        return haystack.includes(query);
     });
+
+    updateProjectCount(filtered.length, query);
+
+    if (filtered.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'col-span-2 flex flex-col items-center justify-center text-center py-24 gap-4';
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-search text-5xl text-gray-800';
+        const msg = document.createElement('p');
+        msg.className = 'text-gray-600 font-mono text-sm';
+        msg.textContent = `No results for "${query}"`;
+        const hint = document.createElement('p');
+        hint.className = 'text-gray-700 font-mono text-xs';
+        hint.textContent = 'Try a different keyword or technology';
+        empty.appendChild(icon);
+        empty.appendChild(msg);
+        empty.appendChild(hint);
+        folderContent.appendChild(empty);
+        return;
+    }
+
+    filtered.forEach(proj => folderContent.appendChild(renderProjectCard(proj, true)));
+}
+
+function updateProjectCount(count, searchQuery) {
+    const el = document.getElementById('archive-project-count');
+    if (!el) return;
+    if (searchQuery) {
+        el.textContent = `— ${count} result${count !== 1 ? 's' : ''} for "${searchQuery}"`;
+    } else {
+        el.textContent = `— ${count} project${count !== 1 ? 's' : ''}`;
+    }
 }
 
 function loadLanding() {
@@ -575,15 +678,23 @@ function loadProjects() {
         const li = document.createElement('li');
         const btn = document.createElement('button');
         btn.className = [
-            'folder-btn', 'w-full', 'text-left', 'px-3', 'py-2', 'rounded',
-            'flex', 'items-center', 'gap-2', 'whitespace-nowrap',
-            isFirst ? 'active text-neon-purple bg-neon-purple/10' : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800'
+            'folder-btn', 'w-full', 'text-left', 'px-3', 'py-2', 'rounded-lg',
+            'flex', 'items-center', 'gap-2', 'whitespace-nowrap', 'transition-colors',
+            isFirst ? 'active text-neon-purple bg-neon-purple/10 border border-neon-purple/20' : 'text-gray-500 hover:text-gray-200 hover:bg-white/5 border border-transparent'
         ].join(' ');
         btn.dataset.folder = key;
         const icon = document.createElement('i');
-        icon.className = 'fas ' + (isFirst ? 'fa-folder-open' : 'fa-folder');
+        icon.className = 'fas ' + (isFirst ? 'fa-folder-open' : 'fa-folder') + ' text-xs flex-shrink-0';
+        const labelSpan = document.createElement('span');
+        labelSpan.className = 'flex-1 text-xs';
+        labelSpan.textContent = key.replace(/_/g, ' ');
+        const countBadge = document.createElement('span');
+        countBadge.className = 'text-xs font-mono px-1.5 py-0.5 rounded-full border border-gray-700/60 text-gray-600 flex-shrink-0';
+        countBadge.style.background = 'rgba(255,255,255,0.03)';
+        countBadge.textContent = archiveData[key].length;
         btn.appendChild(icon);
-        btn.appendChild(document.createTextNode(' ' + key.replace(/_/g, ' ')));
+        btn.appendChild(labelSpan);
+        btn.appendChild(countBadge);
         li.appendChild(btn);
         folderList.appendChild(li);
     });
