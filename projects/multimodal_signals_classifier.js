@@ -4,18 +4,11 @@ window.PORTFOLIO_PROJECTS = window.PORTFOLIO_PROJECTS || [];
 window.PORTFOLIO_PROJECTS.push({
     title: 'Multimodal Signals ML Classifier',
 
-    description: `Development of a pipeline where a raw data file containing a signal from a specific material analysis
-technique is used as input. After automated normalization of this signal, features are extracted and used as
-input data in a pre-trained Random Forest (sklearn) model to predict the type of material corresponding to
-the signal. Based on this pipeline and model, a software solution (Python) with a graphical interface
-(Tkinter) was developed to distribute the tool to analysts. One of the challenges of the project was the
-limited number of data points for each material, but by defining classes of similar materials, this issue was
-overcome. The signals used for analysis are also stored for future model improvement. Previously, this
-analysis took about 30 minutes for experienced analysts and hours for new analysts, but with this solution,
-it can now be performed in seconds with an accuracy of approximately 75%, while also removing the need
-for technical knowledge to interpret the signal (democratizing the analysis). For this project, constant
-communication and meetings with other departments were essential to collect data and monitor software
-performance.`,
+    description: `Development of a pipeline where a raw data file containing a signal from a specific material analysis technique is used as input. 
+    After automated normalization of this signal, features are extracted and used as input data in a pre-trained Random Forest (sklearn) model to predict the type of material corresponding to the signal. Based on this pipeline and model, a software solution (Python) with a graphical interface (Tkinter) was developed to distribute the tool to analysts.
+    One of the challenges of the project was the limited number of data points for each material, but by defining classes of similar materials, this issue was overcome. The signals used for analysis are also stored for future model improvement. 
+    Previously, this analysis took about 30 minutes for experienced analysts and hours for new analysts, but with this solution, it can now be performed in seconds with an accuracy of approximately 75%, while also removing the need for technical knowledge to interpret the signal (democratizing the analysis).
+    For this project, constant communication and meetings with other departments were essential to collect data and monitor software performance.`,
 
     tier: 3,
 
