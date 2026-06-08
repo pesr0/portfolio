@@ -55,7 +55,7 @@
     </script>
 
     <!-- Estilos customizados -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="antialiased selection:bg-neon-purple selection:text-white">
 
@@ -223,14 +223,20 @@
                         <ul id="about-skills" class="grid grid-cols-2 gap-2 font-mono text-sm mt-4"></ul>
                     </div>
 
-                    <div class="md:col-span-2 relative group">
-                        <div class="relative z-10 rounded-xl overflow-hidden glass-panel aspect-square flex items-center justify-center p-2">
-                            <div class="w-full h-full bg-gray-800 rounded-lg overflow-hidden relative">
-                                <img id="about-image" src="" alt="Profile" class="w-full h-full object-cover">
+                    <div class="md:col-span-2 flex flex-col gap-6">
+                        <div class="relative group">
+                            <div class="relative z-10 rounded-xl overflow-hidden glass-panel aspect-square flex items-center justify-center p-2">
+                                <div class="w-full h-full bg-gray-800 rounded-lg overflow-hidden relative">
+                                    <img id="about-image" src="" alt="Profile" class="w-full h-full object-cover">
+                                </div>
                             </div>
+                            <!-- Efeito de sombra atrás da imagem -->
+                            <div class="absolute inset-0 border-2 border-neon-blue rounded-xl translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300"></div>
                         </div>
-                        <!-- Efeito de sombra atrás da imagem -->
-                        <div class="absolute inset-0 border-2 border-neon-blue rounded-xl translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300"></div>
+                        <button id="open-about-story-btn" class="w-full px-6 py-3 border border-neon-blue/40 text-neon-blue font-mono text-sm rounded-lg hover:bg-neon-blue/10 hover:border-neon-blue transition-all flex items-center justify-center gap-2 group/btn">
+                            <i class="fas fa-route text-sm group-hover/btn:translate-x-1 transition-transform duration-200"></i>
+                            Want to know how I got here?
+                        </button>
                     </div>
                 </div>
             </div>
@@ -259,6 +265,41 @@
         </footer>
 
     </main>
+
+    <!-- About Full Story Modal -->
+    <div id="about-story-modal" class="fixed inset-0 z-[200] hidden bg-dark-100/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+        <div class="glass-panel w-full max-w-3xl rounded-2xl border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="about-story-panel">
+
+            <div class="flex justify-between items-center p-5 border-b border-gray-700 bg-dark-200/80">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-user-clock text-neon-blue"></i>
+                    <span class="font-mono text-sm text-gray-300">~/about/full-story</span>
+                </div>
+                <button id="close-about-story-btn" class="text-gray-400 hover:text-white transition-colors p-2">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6 md:p-8 overflow-y-auto max-h-[75vh]">
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+
+                    <!-- Profile photo with 3D tilt animation -->
+                    <div class="flex-shrink-0 flex flex-col items-center mx-auto md:mx-0">
+                        <div id="about-story-img-container" class="w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-neon-blue/30 shadow-[0_0_24px_rgba(0,243,255,0.18)]">
+                            <img id="about-story-image" src="" alt="Profile" class="w-full h-full object-cover">
+                        </div>
+                        <div class="mt-3 w-28 md:w-32 h-px bg-gradient-to-r from-neon-blue/50 to-transparent"></div>
+                    </div>
+
+                    <!-- Story text — populated from full_description_paragraphs -->
+                    <div id="about-story-text" class="text-gray-300 leading-relaxed space-y-5 text-base flex-1">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <!-- Project Archive Modal -->
     <div id="project-archive" class="fixed inset-0 z-[100] hidden bg-dark-100/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
