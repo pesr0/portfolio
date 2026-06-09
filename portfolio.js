@@ -344,6 +344,16 @@ function closeProjectDetail() {
     setTimeout(() => { projectDetailModal.classList.add('hidden'); }, 300);
 }
 
+// ─── Card Expand Modal ────────────────────────────────────────────────
+const cardExpandModal = document.getElementById('card-expand-modal');
+const cardExpandPanel = document.getElementById('card-expand-panel');
+
+document.getElementById('close-card-expand-btn').addEventListener('click', closeCardDetail);
+
+cardExpandModal.addEventListener('click', (e) => {
+    if (e.target === cardExpandModal) closeCardDetail();
+});
+
 // ─── Data Loading ─────────────────────────────────────────────────────
 
 const accentColors = {
@@ -351,6 +361,14 @@ const accentColors = {
     'neon-purple': { text: 'text-neon-purple', hover: 'group-hover:text-neon-purple', link: 'hover:text-neon-purple' },
     'neon-green':  { text: 'text-neon-green',  hover: 'group-hover:text-neon-green',  link: 'hover:text-neon-green'  },
 };
+
+const CARD_PALETTE = [
+    { hex: '#00f3ff', r: '0,243,255'   },
+    { hex: '#b026ff', r: '176,38,255'  },
+    { hex: '#00ff9d', r: '0,255,157'   },
+    { hex: '#f72585', r: '247,37,133'  },
+    { hex: '#ff9f00', r: '255,159,0'   },
+];
 
 function openProjectDetail(proj) {
     const colors = accentColors[proj.accent_color] || accentColors['neon-blue'];
@@ -377,6 +395,15 @@ function openProjectDetail(proj) {
     });
 
     document.getElementById('project-detail-desc').textContent = proj.description || '';
+
+    const detailOutcomesWrap = document.getElementById('project-detail-outcomes');
+    const detailOutcomesText = document.getElementById('project-detail-outcomes-text');
+    if (proj.outcomes) {
+        detailOutcomesText.textContent = proj.outcomes;
+        detailOutcomesWrap.classList.remove('hidden');
+    } else {
+        detailOutcomesWrap.classList.add('hidden');
+    }
 
     const linksContainer = document.getElementById('project-detail-links');
     linksContainer.innerHTML = '';
@@ -429,61 +456,167 @@ function buildLinkAnchor(url, iconClass, className) {
     return a;
 }
 
-function renderProjectCard(proj, showSubTopic) {
-    const card = document.createElement('div');
-    card.className = 'relative rounded-xl border border-gray-700/50 hover:border-neon-purple/60 transition-all duration-200 animate-fade-in overflow-hidden group/card cursor-default';
-    card.style.background = 'rgba(18, 18, 30, 0.7)';
+function openCardDetail(proj, color) {
+    const imageWrap = document.getElementById('card-expand-image-wrap');
 
-    const accentBar = document.createElement('div');
-    accentBar.className = 'absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-neon-purple via-neon-blue/40 to-transparent opacity-60 group-hover/card:opacity-100 transition-opacity';
-    card.appendChild(accentBar);
+    if (proj.image && sanitizeUrl(proj.image) !== '#') {
+        imageWrap.style.backgroundImage = `url('${sanitizeUrl(proj.image)}')`;
+        imageWrap.style.backgroundColor = '';
+    } else {
+        imageWrap.style.backgroundImage = 'none';
+        imageWrap.style.backgroundColor = `rgba(${color.r}, 0.1)`;
+    }
+    imageWrap.style.borderBottomColor = `rgba(${color.r}, 0.2)`;
+
+    document.getElementById('card-expand-title').textContent = proj.title || '';
+
+    const badgesEl = document.getElementById('card-expand-badges');
+    badgesEl.innerHTML = '';
+    if (proj.sub_topic) {
+        const topicBadge = document.createElement('span');
+        topicBadge.className = 'text-xs font-mono px-2 py-0.5 rounded-full border';
+        topicBadge.style.cssText = `color:${color.hex};background:rgba(${color.r},0.1);border-color:rgba(${color.r},0.25)`;
+        topicBadge.textContent = proj.sub_topic.replace(/_/g, ' ');
+        badgesEl.appendChild(topicBadge);
+    }
+    (proj.tech || []).forEach(t => {
+        const badge = document.createElement('span');
+        badge.className = 'text-xs font-mono px-2 py-0.5 rounded border';
+        badge.style.cssText = 'color:rgba(0,243,255,0.85);background:rgba(0,243,255,0.06);border-color:rgba(0,243,255,0.15)';
+        badge.textContent = t;
+        badgesEl.appendChild(badge);
+    });
+
+    document.getElementById('card-expand-desc').textContent = proj.description || '';
+
+    const cardOutcomesWrap = document.getElementById('card-expand-outcomes');
+    const cardOutcomesText = document.getElementById('card-expand-outcomes-text');
+    if (proj.outcomes) {
+        cardOutcomesText.textContent = proj.outcomes;
+        cardOutcomesWrap.classList.remove('hidden');
+    } else {
+        cardOutcomesWrap.classList.add('hidden');
+    }
+
+    const linksEl = document.getElementById('card-expand-links');
+    linksEl.innerHTML = '';
+    if (proj.github_url && sanitizeUrl(proj.github_url) !== '#') {
+        const a = document.createElement('a');
+        a.href = sanitizeUrl(proj.github_url);
+        a.target = '_blank';
+        a.className = 'flex items-center gap-2 px-4 py-2 border border-gray-600 text-gray-300 hover:text-white hover:border-white rounded-lg transition-colors font-mono text-sm';
+        const i = document.createElement('i');
+        i.className = 'fab fa-github';
+        a.appendChild(i);
+        a.appendChild(document.createTextNode(' GitHub'));
+        linksEl.appendChild(a);
+    }
+    if (proj.live_url && sanitizeUrl(proj.live_url) !== '#') {
+        const a = document.createElement('a');
+        a.href = sanitizeUrl(proj.live_url);
+        a.target = '_blank';
+        a.className = 'flex items-center gap-2 px-4 py-2 border rounded-lg transition-colors font-mono text-sm';
+        a.style.cssText = `color:${color.hex};border-color:rgba(${color.r},0.3)`;
+        const i = document.createElement('i');
+        i.className = 'fas fa-external-link-alt';
+        a.appendChild(i);
+        a.appendChild(document.createTextNode(` ${proj.live_label || 'Link'}`));
+        linksEl.appendChild(a);
+    }
+
+    cardExpandPanel.style.borderColor = `rgba(${color.r}, 0.28)`;
+    cardExpandModal.classList.remove('hidden');
+    void cardExpandModal.offsetWidth;
+    cardExpandModal.classList.remove('opacity-0');
+    cardExpandPanel.classList.remove('scale-95');
+    cardExpandPanel.classList.add('scale-100');
+}
+
+function closeCardDetail() {
+    cardExpandModal.classList.add('opacity-0');
+    cardExpandPanel.classList.remove('scale-100');
+    cardExpandPanel.classList.add('scale-95');
+    setTimeout(() => cardExpandModal.classList.add('hidden'), 300);
+}
+
+function renderProjectCard(proj, showSubTopic) {
+    const color = CARD_PALETTE[Math.floor(Math.random() * CARD_PALETTE.length)];
+
+    const card = document.createElement('div');
+    card.className = 'masonry-item relative rounded-xl border transition-all duration-200 animate-fade-in overflow-hidden group/card';
+    card.style.cssText = `background:rgba(14,14,24,0.88);border-color:rgba(${color.r},0.18)`;
+
+    const topLine = document.createElement('div');
+    topLine.style.cssText = `position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,rgba(${color.r},0.75),rgba(${color.r},0.08))`;
+    card.appendChild(topLine);
+
+    const sideBar = document.createElement('div');
+    sideBar.style.cssText = `position:absolute;left:0;top:0;bottom:0;width:2px;background:rgba(${color.r},0.45)`;
+    card.appendChild(sideBar);
 
     const inner = document.createElement('div');
     inner.className = 'p-5';
 
     const headerRow = document.createElement('div');
-    headerRow.className = 'flex justify-between items-start gap-3 mb-3';
+    headerRow.className = 'flex justify-between items-start gap-2 mb-2';
 
     const leftMeta = document.createElement('div');
     leftMeta.className = 'flex-1 min-w-0';
 
     if (showSubTopic && proj.sub_topic) {
         const topicBadge = document.createElement('span');
-        topicBadge.className = 'inline-block text-xs font-mono px-2 py-0.5 rounded-full bg-neon-purple/10 text-neon-purple border border-neon-purple/20 mb-2';
+        topicBadge.className = 'inline-block text-xs font-mono px-2 py-0.5 rounded-full mb-1.5 border';
+        topicBadge.style.cssText = `color:${color.hex};background:rgba(${color.r},0.08);border-color:rgba(${color.r},0.22)`;
         topicBadge.textContent = proj.sub_topic.replace(/_/g, ' ');
         leftMeta.appendChild(topicBadge);
     }
 
     const titleEl = document.createElement('h4');
-    titleEl.className = 'text-sm font-bold text-white group-hover/card:text-neon-purple transition-colors leading-snug';
+    titleEl.className = 'text-sm font-bold text-white transition-colors leading-snug';
     titleEl.textContent = proj.title || '';
     leftMeta.appendChild(titleEl);
 
-    const linksDiv = document.createElement('div');
-    linksDiv.className = 'flex gap-3 flex-shrink-0 mt-0.5';
-    if (proj.github_url) linksDiv.appendChild(buildLinkAnchor(proj.github_url, 'fab fa-github', 'text-gray-600 hover:text-white transition-colors text-sm'));
-    if (proj.live_url && sanitizeUrl(proj.live_url) !== '#') linksDiv.appendChild(buildLinkAnchor(proj.live_url, 'fas fa-external-link-alt', 'text-gray-600 hover:text-white transition-colors text-sm'));
+    const expandBtn = document.createElement('button');
+    expandBtn.className = 'flex-shrink-0 p-1.5 rounded-md transition-all opacity-40 group-hover/card:opacity-100';
+    expandBtn.style.cssText = `color:${color.hex};background:rgba(${color.r},0.08)`;
+    expandBtn.title = 'Expand';
+    expandBtn.innerHTML = '<i class="fas fa-up-right-and-down-left-from-center text-xs"></i>';
+    expandBtn.addEventListener('click', () => openCardDetail(proj, color));
 
     headerRow.appendChild(leftMeta);
-    headerRow.appendChild(linksDiv);
+    headerRow.appendChild(expandBtn);
+    inner.appendChild(headerRow);
+
+    if (proj.github_url || (proj.live_url && sanitizeUrl(proj.live_url) !== '#')) {
+        const linksDiv = document.createElement('div');
+        linksDiv.className = 'flex gap-3 mb-3';
+        if (proj.github_url) linksDiv.appendChild(buildLinkAnchor(proj.github_url, 'fab fa-github', 'text-gray-400 hover:text-white transition-colors text-xs'));
+        if (proj.live_url && sanitizeUrl(proj.live_url) !== '#') linksDiv.appendChild(buildLinkAnchor(proj.live_url, 'fas fa-external-link-alt', 'text-gray-400 hover:text-white transition-colors text-xs'));
+        inner.appendChild(linksDiv);
+    }
 
     const descEl = document.createElement('p');
-    descEl.className = 'text-gray-500 text-xs leading-relaxed mb-4';
-    descEl.textContent = proj.description || '';
+    descEl.className = 'text-gray-400 text-xs leading-relaxed mb-3';
+    descEl.textContent = proj.summary || proj.description || '';
+    inner.appendChild(descEl);
 
     const techDiv = document.createElement('div');
     techDiv.className = 'flex flex-wrap gap-1.5';
     (proj.tech || []).forEach(t => {
         const badge = document.createElement('span');
-        badge.className = 'text-xs font-mono px-2 py-0.5 rounded-md text-neon-blue bg-neon-blue/8 border border-neon-blue/15';
-        badge.style.background = 'rgba(0,243,255,0.06)';
+        badge.className = 'text-xs font-mono px-1.5 py-0.5 rounded border';
+        badge.style.cssText = `color:${color.hex};background:rgba(${color.r},0.06);border-color:rgba(${color.r},0.18)`;
         badge.textContent = t;
         techDiv.appendChild(badge);
     });
-
-    inner.appendChild(headerRow);
-    inner.appendChild(descEl);
     inner.appendChild(techDiv);
+
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (e) => {
+        if (e.target.closest('a') || e.target.closest('button')) return;
+        openCardDetail(proj, color);
+    });
+
     card.appendChild(inner);
     return card;
 }

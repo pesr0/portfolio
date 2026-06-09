@@ -335,11 +335,38 @@
 
                 <!-- Content Grid -->
                 <div class="flex-1 p-5 overflow-y-auto" style="background: rgba(10, 10, 18, 0.3);">
-                    <div id="folder-content" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div id="folder-content" class="masonry-grid">
                     </div>
                 </div>
 
             </div>
+        </div>
+    </div>
+
+    <!-- Card Expand Modal -->
+    <div id="card-expand-modal" class="fixed inset-0 z-[300] hidden bg-dark-100/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+        <div class="w-full max-w-2xl rounded-2xl border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 max-h-[90vh]" id="card-expand-panel" style="background:rgba(12,12,22,0.96);backdrop-filter:blur(16px)">
+
+            <div id="card-expand-image-wrap" class="relative h-48 bg-cover bg-center flex-shrink-0 border-b border-gray-700/50">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-[#0c0c16]"></div>
+                <button id="close-card-expand-btn" class="absolute top-4 right-4 z-10 text-gray-300 hover:text-white transition-colors p-2 bg-black/50 rounded-lg">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+                <div class="absolute bottom-4 left-6 z-10">
+                    <h3 id="card-expand-title" class="text-xl font-bold text-white leading-tight"></h3>
+                </div>
+            </div>
+
+            <div class="p-6 overflow-y-auto">
+                <div id="card-expand-badges" class="flex flex-wrap gap-2 mb-5"></div>
+                <p id="card-expand-desc" class="text-gray-300 leading-relaxed text-sm whitespace-pre-line text-justify"></p>
+                <div id="card-expand-outcomes" class="hidden mt-5">
+                    <p class="text-xs font-mono uppercase tracking-widest text-gray-600 mb-2">Outcomes</p>
+                    <p id="card-expand-outcomes-text" class="text-gray-300 leading-relaxed text-sm whitespace-pre-line text-justify"></p>
+                </div>
+                <div id="card-expand-links" class="flex flex-wrap gap-3 mt-6"></div>
+            </div>
+
         </div>
     </div>
 
@@ -360,7 +387,11 @@
 
             <div class="p-6 overflow-y-auto max-h-[60vh]">
                 <div id="project-detail-tech" class="flex flex-wrap gap-2 mb-5"></div>
-                <p id="project-detail-desc" class="text-gray-300 leading-relaxed text-sm whitespace-pre-line"></p>
+                <p id="project-detail-desc" class="text-gray-300 leading-relaxed text-sm whitespace-pre-line text-justify"></p>
+                <div id="project-detail-outcomes" class="hidden mt-5">
+                    <p class="text-xs font-mono uppercase tracking-widest text-gray-600 mb-2">Outcomes</p>
+                    <p id="project-detail-outcomes-text" class="text-gray-300 leading-relaxed text-sm whitespace-pre-line text-justify"></p>
+                </div>
                 <div id="project-detail-links" class="flex flex-wrap gap-4 mt-6"></div>
             </div>
 

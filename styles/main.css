@@ -126,3 +126,17 @@ body {
 #about-story-img-container {
     transition: transform 0.12s ease-out;
 }
+
+/* Masonry grid for project archive */
+.masonry-grid {
+    column-count: 1;
+    column-gap: 1rem;
+}
+@media (min-width: 640px) {
+    .masonry-grid { column-count: 2; }
+}
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    display: block;
+}
