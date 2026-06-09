@@ -22,7 +22,7 @@ window.PORTFOLIO_PROJECTS.push({
 
     background_image: 'assets/chart_lines.png',
 
-    tech: ['Scipy', 'Sk-learn', 'Machine Learning'],
+    tech: ['Pandas', 'Numpy', 'Scipy', 'Sk-learn', 'Machine Learning'],
 
     // github_url: '#',
 
