@@ -14,22 +14,4 @@ window.PORTFOLIO_PROJECTS.push({
     sub_topic: 'Kumulus',
 
     outcomes: `The assistant lets multiple companies use a single AI support tool while keeping each one's data isolated through their existing CRM login, removing the need for separate deployments or manual configuration per client. Tying the search scope to the authenticated tenant kept the architecture simple to operate and scale as new clients were added, since onboarding a company came down to creating its index and feeding its documents. For end users, it turned a static knowledge base into a conversational assistant that answers grounded in their own company's material.`,
-
-    // image: 'assets/',
-    
-    // github_url: '#',
-
-    // live_url: '#'
-
-    // live_label: 'PLACEHOLDER',
-    
-    // tier: 0,
-    
-    // background_image: 'assets/',
-    
-    // Available colors: neon-blue | neon-purple | neon-green
-    // accent_color: 'neon-blue',
-
-    // FontAwesome icon (e.g. 'fas fa-folder-open', 'fas fa-brain', 'fas fa-chart-line')
-    // icon: 'fas fa-car-side',
 });

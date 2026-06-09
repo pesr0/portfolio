@@ -14,22 +14,4 @@ window.PORTFOLIO_PROJECTS.push({
     sub_topic: 'Kumulus',
 
     outcomes: `The assessment surfaced several issues that were affecting reliability and cost, including a bug where the stored answer could differ from what the user actually received, confidence checks that never triggered in practice, and a retrieval step that inflated cost by sending irrelevant context to the model. Turning these into a prioritized roadmap gave the client a clear path to improve response quality and reduce wasted processing. Beyond the technical findings, the engagement built enough confidence in the direction of the system that it became the basis for a larger, signed development project, which was the main business outcome.`,
-
-    // image: 'assets/',
-    
-    // github_url: '#',
-
-    // live_url: '#'
-
-    // live_label: 'PLACEHOLDER',
-    
-    // tier: 0,
-    
-    // background_image: 'assets/',
-    
-    // Available colors: neon-blue | neon-purple | neon-green
-    // accent_color: 'neon-blue',
-
-    // FontAwesome icon (e.g. 'fas fa-folder-open', 'fas fa-brain', 'fas fa-chart-line')
-    // icon: 'fas fa-car-side',
 });
