@@ -15,13 +15,11 @@ window.PORTFOLIO_PROJECTS.push({
     
     sub_topic: 'Personal/Study',
 
-    // outcomes: ``,
+    image: 'assets/wppinit.png',
     
     github_url: 'https://github.com/pesr0/-PERSONAL-wpp-init-chat',
     
     live_url: 'https://pesr0.github.io/-PERSONAL-wpp-init-chat/',
 
     live_label: 'Demo',
-
-    image: 'assets/wppinit.png',
 });

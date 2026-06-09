@@ -11,11 +11,11 @@ window.PORTFOLIO_PROJECTS.push({
     I developed scripts to identify and extract relevant data related to artifacts in the images (OpenCV). At the end of the process, the collected data was provided through practical and easy-to-understand visualizations. 
     This method was transformed into a web application (Streamlit), deployed in an Azure container (Docker), and made available to company users, allowing simultaneous access by multiple users.`,
 
-    tech: ['Pandas', 'Numpy', 'OpenCV', 'Docker', 'Streamlit', 'Image Analysis'],
+    tech: ['Pandas', 'Numpy', 'Computer Vision', 'Docker', 'Streamlit', 'Image Analysis'],
 
     sub_topic: 'Braskem',
     
-    // outcomes: ``,
+    outcomes: `Previously, analysis depended on a single licensed workstation operated by one trained specialist, with turnaround times stretching to several weeks. The solution democratized access to the analysis, empowering users to run and customize their own analyses on demand. As a result, turnaround dropped from weeks to minutes, completed entirely from the user's own desk.`,
 
     image: 'assets/image_featurization.jpeg',
 });

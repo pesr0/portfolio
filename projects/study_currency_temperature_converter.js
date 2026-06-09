@@ -14,10 +14,7 @@ window.PORTFOLIO_PROJECTS.push({
     
     sub_topic: 'Personal/Study',
     
-    // outcomes: ``,
-    
-    github_url: 'https://github.com/pesr0/-STUDY-currency_and_temperature_java_converter',
-    
     image: 'assets/converter.png',
-    
+
+    github_url: 'https://github.com/pesr0/-STUDY-currency_and_temperature_java_converter',    
 });

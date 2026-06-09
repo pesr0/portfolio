@@ -6,17 +6,14 @@ window.PORTFOLIO_PROJECTS.push({
 
     summary: `ML pipeline + Tkinter desktop app to classify material signals in seconds. Replaced a 30-minute manual analysis with ~75% accuracy via Random Forest, making the result accessible to non-technical analysts.`,
 
-    description: `Development of a pipeline where a raw data file containing a signal from a specific material analysis technique is used as input. 
-    After automated normalization of this signal, features are extracted and used as input data in a pre-trained Random Forest (sklearn) model to predict the type of material corresponding to the signal. Based on this pipeline and model, a software solution (Python) with a graphical interface (Tkinter) was developed to distribute the tool to analysts.
-    One of the challenges of the project was the limited number of data points for each material, but by defining classes of similar materials, this issue was overcome. The signals used for analysis are also stored for future model improvement. 
-    Previously, this analysis took about 30 minutes for experienced analysts and hours for new analysts, but with this solution, it can now be performed in seconds with an accuracy of approximately 75%, while also removing the need for technical knowledge to interpret the signal (democratizing the analysis).
-    For this project, constant communication and meetings with other departments were essential to collect data and monitor software performance.`,
+    description: `Developed an end-to-end pipeline that takes a raw data file (a signal from a specific material analysis technique) as input. The signal is automatically normalized, after which relevant features are extracted and fed into a pre-trained Random Forest model (scikit-learn) to predict the corresponding material type. Building on this pipeline, I developed a Python software solution with a graphical interface (Tkinter) to distribute the tool to analysts.
+    A key challenge was the limited number of data points available per material. I overcame this by grouping similar materials into defined classes. The system also stores incoming signals for continuous model improvement over time. Close, ongoing collaboration with other departments was essential throughout the project, both to gather training data and to monitor the software's performance in production.`,
     
     tech: ['Pandas', 'Numpy', 'Scipy', 'Sk-learn', 'Machine Learning'],
     
     sub_topic: 'Braskem',
     
-    // outcomes: ``,
+    outcomes: `The analysis previously took experienced analysts (analysts with around 30 years of experience) around 30 minutes, and several hours for newer analysts. With this solution, it now runs in seconds at approximately 75% accuracy. Just as importantly, it removed the need for specialized technical knowledge to interpret the signal, democratizing the analysis across the team.`,
     
     image: 'assets/signal_comparator.jpeg',
     
