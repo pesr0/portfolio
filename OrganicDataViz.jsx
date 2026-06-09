@@ -24,7 +24,7 @@ function radialGlow(ctx, x, y, r, color, alpha) {
 // ─── Scene 1: Neural Network Pulse ──────────────────────────────────────────
 
 function initNeural(W, H) {
-    const count = rndInt(13, 20);
+    const count = rndInt(25, 50);
     const nodes = Array.from({ length: count }, () => ({
         x: rnd(35, W - 35),
         y: rnd(35, H - 35),
@@ -99,7 +99,7 @@ function drawNeural(ctx, s, dt, mx, my, W, H) {
 // ─── Scene 2: Data Clustering ────────────────────────────────────────────────
 
 function initClustering(W, H) {
-    const k = rndInt(3, 5);
+    const k = rndInt(6, 8);
     return {
         k,
         centers: Array.from({ length: k }, (_, i) => ({
