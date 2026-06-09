@@ -7,7 +7,7 @@ window.PORTFOLIO_PROJECTS.push({
     summary: `RAG chatbot letting factory employees query CNC machine manuals in natural language. Open-source LLMs (Llama3, Mistral) run locally on a GPU server via vLLM, keeping all sensitive documentation completely internal.`,
 
     
-    description: `Development of a RAG chatbot enabling factory employees to query technical manuals for CNC machines in natural language, replacing slow manual searches through extensive PDF documentation. 
+    description: `Development of a RAG chatbot enabling factory employees to query technical manuals for machines in natural language, replacing slow manual searches through extensive PDF documentation. 
     The system classifies each incoming message to determine whether retrieval is needed, generates embeddings of the query, and performs hybrid search (Azure AI Search) to retrieve the most relevant document chunks before generating a response. 
     A key architectural decision was running open-source LLMs locally (Llama3, Mistral, Qwen) via vLLM on a GPU server (Azure VM), eliminating dependency on external AI APIs and keeping sensitive documentation internal. 
     Models run in Docker containers with a custom control API managing which model is active due to VRAM constraints. 
@@ -17,7 +17,7 @@ window.PORTFOLIO_PROJECTS.push({
     
     sub_topic: 'Kumulus',
     
-    // outcomes: ``,
+    outcomes: `The solution delivered a predictable-cost infrastructure, independent of per-token consumption pricin, while keeping the client's private data protected from third-party AI providers. The architecture is fully scalable to serve employees across the client company.`,
     
     image: 'assets/hugging_face.png',
     

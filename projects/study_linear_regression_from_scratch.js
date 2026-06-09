@@ -15,9 +15,7 @@ window.PORTFOLIO_PROJECTS.push({
 
     sub_topic: 'Personal/Study',
 
-    // outcomes: ``,
+    image: 'assets/lin_reg.png',
     
     github_url: 'https://github.com/pesr0/-STUDY-ml_from_scratch/tree/main/reg_model_from_scratch',
-    
-    image: 'assets/lin_reg.png',
 });

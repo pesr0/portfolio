@@ -13,9 +13,7 @@ window.PORTFOLIO_PROJECTS.push({
 
     sub_topic: 'Personal/Study',
 
-    // outcomes: ``,
+    image: 'assets/ml_api.png',
     
     github_url: 'https://github.com/pesr0/-STUDY-mercado_livre_api_data_upload',
-
-    image: 'assets/ml_api.png',
 });

@@ -14,13 +14,13 @@ window.PORTFOLIO_PROJECTS.push({
 
     // outcomes: ``,
 
+    // image: 'assets/',
+    
     // github_url: '#',
 
     // live_url: '#'
 
     // live_label: 'PLACEHOLDER',
-
-    // image: 'assets/',
     
     // tier: 0,
     

@@ -15,9 +15,7 @@ window.PORTFOLIO_PROJECTS.push({
     
     sub_topic: 'Personal/Study',
 
-    // outcomes: ``,
+    image: 'assets/kmeans_clust_model.png',
     
     github_url: 'https://github.com/pesr0/-STUDY-ml_from_scratch/tree/main/kmeans_clust_from_scratch',
-    
-    image: 'assets/kmeans_clust_model.png',
 });
